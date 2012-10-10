@@ -8,6 +8,13 @@ Window.application = {
 // Dom Ready
 $(function(){
 
+  $(".btn").each(function(){
+    var self = this;
+    $(self).bind("focus",$(self).tooltip({
+      placement:"bottom",
+      delay: { show: 300, hide: 100 }
+    }))
+  });
   // Initilize CodeMirror Editor
   Window.application.editor = CodeMirror.fromTextArea(document.getElementById("in"), {
     mode: 'gfm',// github-flavored-markdown
