@@ -1,0 +1,187 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="title" content="Markdown Edit">
+  <meta name="author" content="Takeharu.Oshida">
+  <meta name="email" content="georgeosddev@email.com">
+  <meta name="description" content="online markdown editor with realtime html preview.">
+  <meta name="keywords" content="markdown, github, github-flavored-markdown, FileAPI, codemirror, george_osd">
+
+  <title>Markdown Edit</title>
+  <link rel="stylesheet" href="vendor/bootstrap-2.1.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="vendor/font-awesome-2.0/css/font-awesome.css">
+  <link rel="stylesheet" href="css/codemirror-custom.css">
+  <link rel="stylesheet" href="css/github-style.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header id="header" class="header">
+  <h2>Markdown Edit <span><small>Powerd by <a href="http://codemirror.net/" title="codemirror" target="_blank">CodeMirror</a>,&nbsp;<a href="http://developer.github.com/v3/markdown/#render-a-markdown-document-in-raw-mode" "http://developer.github.com/v3/markdown/" target="_blank">github's Markdown Rendering API</a>,&nbsp;<a href="http://jquery.com/" target="_blank" title="jQuery">jQuery</a>,&nbsp;and&nbsp;<a href="http://twitter.github.com/bootstrap/index.html" target="_blank" title="bootstrap">Twitter-Bootstrap</a>&nbsp;with&nbsp;<a href="http://fortawesome.github.com/Font-Awesome/" target="_blank" title="Font Awesome">Font Awesome</a></small></span></h2>
+  <div id="menu">
+  <p>
+    <button class="btn btn-small" id="btnRead" onclick="readFile()" rel="tooltip" title="open file"><i class="icon-folder-open"></i></button>
+    <button class="btn btn-small" id="btnSave" onclick="saveFile()" rel="tooltip" title="save .md"><i class="icon-save"></i></button>
+    <button class="btn btn-small" id="btnDL" onclick="downloadFile()" rel="tooltip" title="save .html"><i class="icon-download-alt"></i></button>
+    <button class="btn btn-small" id="btnConv" onclick="convert()" rel="tooltip" title="convert"><i class="icon-refresh"></i></button>
+<!--     &nbsp;&nbsp;|&nbsp;&nbsp;
+    <button class="btn btn-small" id="btnGist" onclick="publishGist()" rel="tooltip" title="publish gist"><i class="icon-github"></i></button>
+    <span id="githubId">Guest</span>
+    <span id="apiLimit"></span>
+ -->  </p>
+    <input type="checkbox" id="autoReload"> Auto Reload
+  </div>
+  <a id="githubribbon" href="https://github.com/georgeosddev/markdown-edit" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+  </header><!-- /header -->
+  <section id="main">
+    <textarea id="in">
+# Markdown Edit
+
+[Markdown Edit](http://georgeosddev.github.com/markdown-edit) is online markdown editor.
+
+## Feature
+
+### github api
+
+#### api
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+
+#### style
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+```html
+&lt;link rel="stylesheet" href="css/github-style.css"&gt;
+```
+
+
+### online edit
+
+#### codemirror editor
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+
+#### File API
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+
+## Getting Started
+
+### On your local PC
+
+1.download sources
+
+* using git
+```
+git clone http://github.com/georegeosddev/markdown-edit.git
+```
+* or download from [Here](http://example.com)
+
+1. deploy some web server
+To avoid ajax error
+
+
+### Markdown Syntax
+This app is based on [github-flavored-markdown](http://github.github.com/github-flavored-markdown/)&lt;br&gt;
+So you can use markdown syntax and also pure html like this
+
+###### Sample of Table for two
+-------------
+```
+ID  |Name|Rank
+----|----|----
+1   |Tom Preston-Werner |Awesome
+2   |Albert Einstein |Nearly as awesome
+```
+
+become
+
+ID  |Name|Rank
+----|----|----
+1   |Tom Preston-Werner |Awesome
+2   |Albert Einstein |Nearly as awesome
+
+and
+
+```html
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;ID&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Rank&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;1&lt;/td&gt;&lt;td&gt;Tom Preston-Werner&lt;/td&gt;&lt;td&gt;Awesome&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;2&lt;/td&gt;&lt;td&gt;Albert Einstein&lt;/td&gt;&lt;td&gt;Nearly as awesome&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+```
+
+also become
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;ID&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Rank&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;1&lt;/td&gt;&lt;td&gt;Tom Preston-Werner&lt;/td&gt;&lt;td&gt;Awesome&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;2&lt;/td&gt;&lt;td&gt;Albert Einstein&lt;/td&gt;&lt;td&gt;Nearly as awesome&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+
+See also
+ * [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/) at DARING FIREBALL
+ * [github-flavored-markdown](http://github.github.com/github-flavored-markdown/) at github
+
+## Issue List
+
+* Auto Reload
+* File API
+* Key binding
+  * all clear
+  * exec convert
+  * save file
+* js minify
+* Licence
+* github pages
+* default markdown read me
+
+## Licence
+
+Source code can be found on [github](https://github.com/georgeOsdDev/markdown-edit), licenced under [MIT](http://opensource.org/licenses/mit-license.php). And Document can be found [Here](https://github.com/georgeOsdDev/markdown-edit/blob/master/ReadMe.md)
+
+Developed by [Takeharu.Oshida](http://about.me/takeharu.oshida)
+    </textarea>
+    <div id="out" class="markdown-body"></div><!-- /converted html will be here -->
+    <div class="clear"></div>
+  </section>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script src='vendor/bootstrap-2.1.1/js/bootstrap.min.js'></script>
+  <script src="vendor/codemirror-2.34/lib/codemirror.js"></script>
+  <script src="vendor/codemirror-2.34/lib/util/overlay.js"></script>
+  <script src="vendor/codemirror-2.34/mode/xml/xml.js"></script>
+  <script src="vendor/codemirror-2.34/mode/markdown/markdown.js"></script>
+  <script src="vendor/codemirror-2.34/mode/gfm/gfm.js"></script>
+  <script src="vendor/codemirror-2.34/mode/javascript/javascript.js"></script>
+  <script src="javascript/scrollTop.js"></script>
+  <script src="javascript/app.js"></script>
+  <!--script>var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-XXXXXXXX-XX']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script-->
+</body>
+</html>
