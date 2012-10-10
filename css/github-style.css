@@ -50,8 +50,35 @@ https://raw.github.com/github/gollum/master/lib/gollum/frontend/public/gollum/cs
 .markdown-body h4:hover a.anchor,
 .markdown-body h5:hover a.anchor,
 .markdown-body h6:hover a.anchor {
-  background: url(../images/pin-20.png) no-repeat left center;
+  /*background: url(../images/pin-20.png) no-repeat left center;*/
   text-decoration: none;
+}
+/* add anchor image*/
+.markdown-body h1:hover a.anchor:before,
+.markdown-body h2:hover a.anchor:before,
+.markdown-body h3:hover a.anchor:before,
+.markdown-body h4:hover a.anchor:before,
+.markdown-body h5:hover a.anchor:before,
+.markdown-body h6:hover a.anchor:before {
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: inherit;
+  content: "\f0c1";
+  padding-left: 10px;
+  margin-left: -30px;
+  color: black;
+}
+.markdown-body h1:hover a.anchor:before,
+.markdown-body h2:hover a.anchor:before {
+  padding-left: 5px;
+}
+.markdown-body h3:hover a.anchor:before,
+.markdown-body h4:hover a.anchor:before,
+.markdown-body h5:hover a.anchor:before,
+.markdown-body h6:hover a.anchor:before {
+  padding-left: 10px;
 }
 .markdown-body h1 tt,
 .markdown-body h1 code,
