@@ -160,8 +160,14 @@ function readFile(){
 function saveFile(file){
 }
 
-// exec auto reload
+// exec auto reload per 5(sec) if markdown was changed
 function autoReload(){
+  if (application.enabeAutoReload){
+    setTimeout(function(){
+      if (application.md != application.editor.getValue()) convert();
+      autoReload();
+    },5000);
+  }
 }
 
 // convert markdown to html
@@ -190,7 +196,10 @@ function convert(){
   .done(function(data){
     // console.log("done");
     // render html data
-    $("#out").addClass("display-none").append(data).fadeIn();    
+    $("#out").addClass("display-none");
+    setTimeout(function(){
+      $("#out").append(data).fadeIn();
+    },500);    
   })
   .fail(function(data){
     // console.log("fail");
