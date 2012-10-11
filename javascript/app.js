@@ -147,32 +147,33 @@ function autoReload(){
 function convert(){
   // save CodeMirror to textarea
   window.application.editor.save();
+  application.md = $("#in").val();
 
   // hide html
-  var progressbar="<div id='progress' class='progress progress-info progress-striped active'><div id='bar' class='bar' style='width: 100%'></div></div>";
-  $("#out").fadeOut().empty().append(progressbar); 
+  $("#out").fadeOut().empty();
   
   // call github's API
   $.ajax({
     "url":"https://api.github.com/markdown/raw",
     "type":"POST",
     "contentType":"text/plain",
-    "data":$("#in").val(),
+    "data":application.md,
     "complete":function(jqXHR, textStatus){
       // api limit count
-      // console.log(jqXHR.getResponseHeader("X-RateLimit-Remaining"));
       application.apiLimit = jqXHR.getResponseHeader("X-RateLimit-Remaining");
+      if (application.apiLimit < 50) {
+        showAlert("X-RateLimit-Remaining is less than 50. It was limited 5000 request per hour from same IP");
+      }
     }
   })
   .done(function(data){
     // console.log("done");
     // render html data
     $("#out").addClass("display-none").append(data).fadeIn();    
-    $("#progress").remove();
   })
   .fail(function(data){
     // console.log("fail");
-    // alert dialogue
+    showAlert("failed to ajax request. Try again.");
   })
   .always(function(data){
     // console.log("always");
