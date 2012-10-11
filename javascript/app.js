@@ -1,20 +1,45 @@
-
 // namespace
 window.application = {
   editor:"",
-  apiLimit:1500
+  apiLimit:1500,
+  enabeAutoReload:false,
+  enableShortcut:false,
+  md:""
 };
 
 // Dom Ready
 $(function(){
 
+  // handle file
+  $("#lefile").change(function() {
+     $('#fileinput').val($(this).val());
+  }); 
+
+  // button binding
   $(".btn").each(function(){
     var self = this;
-    $(self).bind("focus",$(self).tooltip({
-      placement:"bottom",
-      delay: { show: 300, hide: 100 }
-    }))
+    $(self).bind("hover",function(){
+      $(self).tooltip({
+          placement:"bottom",
+          delay: { show: 100, hide: 100 }
+      });
+    })
+    .bind("click",function(){
+      handleOnClick($(self).attr("id"));
+    });
   });
+
+  // checkbox binding
+  $("#autoReload").change(function() {
+     application.enabeAutoReload = ($(this).attr("checked") === "checked");
+     autoReload();
+  });
+
+  // checkbox binding
+  $("#enableShortcut").change(function() {
+     application.enableShortcut = ($(this).attr("checked") === "checked");
+  }); 
+
   // Initilize CodeMirror Editor
   application.editor = CodeMirror.fromTextArea(document.getElementById("in"), {
     mode: 'gfm',// github-flavored-markdown
@@ -37,6 +62,46 @@ $(function(){
   // Initialize html view
   convert();
 })
+
+function handleOnClick(id){
+  switch (id) {
+    case "btnBrowse":
+      // show file browse dialogue
+      $("#lefile").click();
+    break;
+    case "btnRead":
+      // read local file    
+      readFile();
+    break;    
+    case "btnSave":
+      // show .md file    
+      saveFile("md");
+    break;
+    case "btnDl":
+      // save .html file
+      saveFile("html");
+    break;
+    case "btnConv":
+      // exec convert  
+      convert();
+    break;
+    default:
+      console.log("Error:invalid case");
+    break;
+  }
+}
+
+// read local file
+function readFile(){
+}
+
+// save file to local
+function saveFile(file){
+}
+
+// exec auto reload
+function autoReload(){
+}
 
 // convert markdown to html
 function convert(){
