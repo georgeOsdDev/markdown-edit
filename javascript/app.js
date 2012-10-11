@@ -6,6 +6,7 @@ window.application = {
   enableShortcut:false,
   md:""
 };
+window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
 
 // Dom Ready
 $(function(){
@@ -14,6 +15,17 @@ $(function(){
   $("#lefile").change(function() {
      $('#fileinput').val($(this).val());
   }); 
+
+  // drag drop
+  // $("#in").bind("ondrop",function(event){
+  //   event.preventDefault();
+  //   var file = event.dataTransfer.files[0];
+  //   $('#fileinput').val(f.name);
+  //   readFile(file);
+  // })
+  // .bind("ondragover",function(event){
+  //   event.preventDefault();
+  // });
 
   // button binding
   $(".btn").each(function(){
@@ -132,8 +144,8 @@ function handleOnClick(id){
 }
 
 // read local file
-function readFile(){
-  var fileData = document.getElementById("lefile").files[0];
+function readFile(f){
+  var fileData = f || document.getElementById("lefile").files[0];
   if (!fileData){
     showAlert("File was not found.");
     return;
@@ -158,6 +170,42 @@ function readFile(){
 
 // save file to local
 function saveFile(file){
+  var text,blobBuilder,fileName;
+  switch (file) {
+    case "md":
+      text = application.editor.getValue();
+      break;
+    case "html":
+      text = $("#out").html();
+      break;
+    default:
+      console.log("invalid param");
+      return;
+  }
+  var dd = new Date();
+  filename = dd.getMilliseconds() + "." + file;
+  if ("MozBlobBuilder" in window) {
+    blobBuilder = new MozBlobBuilder();
+  } else if ("WebKitBlobBuilder" in window) {
+    blobBuilder = new WebKitBlobBuilder();
+  }
+  blobBuilder.append(text);
+
+  function onInitFs(fs) {
+    fs.root.getFile(filename, {create: true}, function(fileEntry) {
+      fileEntry.createWriter(function(fileWriter) {
+        fileWriter.onwriteend = function(e) {
+          console.log('Write completed.');
+        };
+        fileWriter.onerror = function(e) {
+          console.log('Write failed: ' + e.toString());
+          showAlert("faild to write file");
+        };
+        fileWriter.write(blobBuilder.getBlob('text/plain'));
+      }, showAlert("faild to write file"));
+    }, showAlert("faild to write file"));
+  }
+  window.requestFileSystem(window.TEMPORARY, 1024*1024, onInitFs);
 }
 
 // exec auto reload per 5(sec) if markdown was changed
@@ -173,7 +221,7 @@ function autoReload(){
 // convert markdown to html
 function convert(){
   // save CodeMirror to textarea
-  window.application.editor.save();
+  application.editor.save();
   application.md = $("#in").val();
 
   // hide html
