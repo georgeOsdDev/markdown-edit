@@ -40,6 +40,46 @@ $(function(){
      application.enableShortcut = ($(this).attr("checked") === "checked");
   }); 
 
+  $("body").keydown( function(event) {
+    if (application.enableShortcut){ 
+      var code = (event.keyCode ? event.keyCode : event.which)
+      ,ctrl = event.ctrlKey
+      ,alt = event.altKey
+      ,shift = event.shiftKey
+      ,cmd = event.metaKey;
+      // browse file `ctrl + b`
+      if ((ctrl || cmd) && code == 66) {
+        event.preventDefault();
+        $("#lefile").click();
+        return;
+      }
+      // read file `ctrl + r`
+      if ((ctrl || cmd) && code == 82) {
+        event.preventDefault();
+        readFile();
+        return;
+      }
+      // save .md file `ctrl + s`
+      if ((ctrl || cmd) && !shift && code == 83) {
+        event.preventDefault();
+        saveFile("md");
+        return;
+      }
+      // save .html file `ctrl + shift + s`
+      if ((ctrl || cmd) && shift && code == 83) {
+        event.preventDefault();
+        saveFile("html");
+        return;
+      }
+      // exec convert `ctrl + e`
+      if ((ctrl || cmd) && code == 69) {
+        event.preventDefault();
+        convert();
+        return;
+      }
+    }
+  });
+
   // Initilize CodeMirror Editor
   application.editor = CodeMirror.fromTextArea(document.getElementById("in"), {
     mode: 'gfm',// github-flavored-markdown
