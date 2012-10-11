@@ -133,6 +133,27 @@ function handleOnClick(id){
 
 // read local file
 function readFile(){
+  var fileData = document.getElementById("lefile").files[0];
+  if (!fileData){
+    showAlert("File was not found.");
+    return;
+  }
+  if (fileData.type && !fileData.type.match('text.*')) {
+    showAlert("Cannot read file. Please set plain text file.");
+    return;
+  }
+  var reader = new FileReader();
+  reader.onerror = function (evt) {
+    showAlert("Cannot read file, some eroor occuerd.");
+    return;
+  }
+  reader.onload = function(evt){
+    $("#in").val(evt.target.result);
+    application.editor.setValue(evt.target.result);
+    convert();
+  }
+  reader.readAsText(fileData, "utf-8");
+  // console.log("start read");
 }
 
 // save file to local
