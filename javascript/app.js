@@ -74,3 +74,26 @@ function convert(){
     // do nothing.
   })
 }
+
+// showAlert
+function showAlert(msg){
+  $("#alertMessage>p").text(msg);
+  $("#alertMessage")
+  .removeClass("display-none")
+  .removeClass("out")
+  .addClass("in")
+  .bind("close", function (evt) {
+    evt.preventDefault();
+    $(this)
+    .removeClass("in")
+    .addClass("out")
+    .trigger("closed");
+  })
+  .bind("closed", function () {
+    var self = this;
+    setTimeout(function(){
+      $(self).addClass("display-none")
+    },500);
+  });
+}
+
