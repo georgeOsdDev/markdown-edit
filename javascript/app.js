@@ -1,6 +1,6 @@
 
 // namespace
-Window.application = {
+window.application = {
   editor:"",
   apiLimit:1500
 };
@@ -16,7 +16,7 @@ $(function(){
     }))
   });
   // Initilize CodeMirror Editor
-  Window.application.editor = CodeMirror.fromTextArea(document.getElementById("in"), {
+  window.application.editor = CodeMirror.fromTextArea(document.getElementById("in"), {
     mode: 'gfm',// github-flavored-markdown
     lineNumbers: true,
     matchBrackets: true,
@@ -28,11 +28,11 @@ $(function(){
       $(".CodeMirror-scroll").removeClass("focus");
     },
     onCursorActivity: function() {
-      Window.application.editor.setLineClass(hlLine, null, null);
-      hlLine = Window.application.editor.setLineClass(Window.application.editor.getCursor().line, null, "activeline");
+      window.application.editor.setLineClass(hlLine, null, null);
+      hlLine = window.application.editor.setLineClass(window.application.editor.getCursor().line, null, "activeline");
     }
   });
-  var hlLine = Window.application.editor.setLineClass(0, "activeline");
+  var hlLine = window.application.editor.setLineClass(0, "activeline");
 
   // Initialize html view
   convert();
@@ -41,7 +41,7 @@ $(function(){
 // convert markdown to html
 function convert(){
   // save CodeMirror to textarea
-  Window.application.editor.save();
+  window.application.editor.save();
 
   // hide html
   var progressbar="<div id='progress' class='progress progress-info progress-striped active'><div id='bar' class='bar' style='width: 100%'></div></div>";
@@ -56,7 +56,7 @@ function convert(){
     "complete":function(jqXHR, textStatus){
       // api limit count
       // console.log(jqXHR.getResponseHeader("X-RateLimit-Remaining"));
-      Window.application.apiLimit = jqXHR.getResponseHeader("X-RateLimit-Remaining");
+      window.application.apiLimit = jqXHR.getResponseHeader("X-RateLimit-Remaining");
     }
   })
   .done(function(data){
