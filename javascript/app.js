@@ -16,7 +16,7 @@ $(function(){
     }))
   });
   // Initilize CodeMirror Editor
-  window.application.editor = CodeMirror.fromTextArea(document.getElementById("in"), {
+  application.editor = CodeMirror.fromTextArea(document.getElementById("in"), {
     mode: 'gfm',// github-flavored-markdown
     lineNumbers: true,
     matchBrackets: true,
@@ -28,11 +28,11 @@ $(function(){
       $(".CodeMirror-scroll").removeClass("focus");
     },
     onCursorActivity: function() {
-      window.application.editor.setLineClass(hlLine, null, null);
-      hlLine = window.application.editor.setLineClass(window.application.editor.getCursor().line, null, "activeline");
+      application.editor.setLineClass(hlLine, null, null);
+      hlLine = application.editor.setLineClass(application.editor.getCursor().line, null, "activeline");
     }
   });
-  var hlLine = window.application.editor.setLineClass(0, "activeline");
+  var hlLine = application.editor.setLineClass(0, "activeline");
 
   // Initialize html view
   convert();
@@ -56,7 +56,7 @@ function convert(){
     "complete":function(jqXHR, textStatus){
       // api limit count
       // console.log(jqXHR.getResponseHeader("X-RateLimit-Remaining"));
-      window.application.apiLimit = jqXHR.getResponseHeader("X-RateLimit-Remaining");
+      application.apiLimit = jqXHR.getResponseHeader("X-RateLimit-Remaining");
     }
   })
   .done(function(data){
