@@ -10,7 +10,12 @@ body {
   bottom: 0px;
   padding: 5px 0;
   margin-top: 5px;
+  margin-left: 5px;
   text-align: left;
+}
+
+.header h2 {
+  line-height: 20px;
 }
 
 .header small {
@@ -19,6 +24,14 @@ body {
 
 .header p {
   margin-bottom: 0;
+}
+
+.header #menu1 input {
+  height: 16px;
+}
+
+.header form {
+  margin-bottom: 0px;
 }
 
 .clear {
@@ -39,15 +52,7 @@ body {
   display:none;
 }
 
-.header{
-  margin-left: 10px;
-}
-
-.header h2 {
-  line-height: 20px;
-}
-
-#in, {
+#in {
   width:45%;
   height:1000px;
   float: left;
@@ -63,4 +68,8 @@ body {
 
 #progress {
   z-index:5px;
+}
+
+.alert {
+  margin:5px 5px;
 }

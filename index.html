@@ -24,23 +24,33 @@
 </head>
 <body>
   <header id="header" class="header">
-  <h2>Markdown Edit <span><small>Powerd by <a href="http://codemirror.net/" title="codemirror" target="_blank">CodeMirror</a>,&nbsp;<a href="http://developer.github.com/v3/markdown/#render-a-markdown-document-in-raw-mode" "http://developer.github.com/v3/markdown/" target="_blank">github's Markdown Rendering API</a>,&nbsp;<a href="http://jquery.com/" target="_blank" title="jQuery">jQuery</a>,&nbsp;and&nbsp;<a href="http://twitter.github.com/bootstrap/index.html" target="_blank" title="bootstrap">Twitter-Bootstrap</a>&nbsp;with&nbsp;<a href="http://fortawesome.github.com/Font-Awesome/" target="_blank" title="Font Awesome">Font Awesome</a></small></span></h2>
-  <div id="menu">
-  <p>
-    <button class="btn btn-small" id="btnRead" onclick="readFile()" rel="tooltip" title="open file"><i class="icon-folder-open"></i></button>
-    <button class="btn btn-small" id="btnSave" onclick="saveFile()" rel="tooltip" title="save .md"><i class="icon-save"></i></button>
-    <button class="btn btn-small" id="btnDL" onclick="downloadFile()" rel="tooltip" title="save .html"><i class="icon-download-alt"></i></button>
-    <button class="btn btn-small" id="btnConv" onclick="convert()" rel="tooltip" title="convert"><i class="icon-refresh"></i></button>
-<!--     &nbsp;&nbsp;|&nbsp;&nbsp;
-    <button class="btn btn-small" id="btnGist" onclick="publishGist()" rel="tooltip" title="publish gist"><i class="icon-github"></i></button>
-    <span id="githubId">Guest</span>
-    <span id="apiLimit"></span>
- -->  </p>
-    <input type="checkbox" id="autoReload"> Auto Reload
+  <h2><i class="icon-edit"></i>&nbsp;Markdown Edit<span><small>&nbsp;&nbsp;</small></span></h2>
+  <div id="menu1">
+    <span class="input-append">
+      <input id="lefile" type="file" style="display:none">
+      <input id="fileinput" class="input-large" type="text" placeholder="set your local file">
+      <button id="btnBrowse" class="btn btn-small" rel="tooltip" title="browse file &lt;br&gt;Mac : &#8984; + b&lt;br&gt;Win : ctrl + b"><i class="icon-folder-open"></i></button>
+      <button id="btnRead" class="btn btn-small" rel="tooltip" title="read file &lt;br&gt;Mac : &#8984; + r&lt;br&gt;Win : ctrl + r"><i class="icon-refresh"></i></button>
+    </span>
+    <span>&nbsp;
+      <button id="btnSave" class="btn btn-small" rel="tooltip" title="save .md &lt;br&gt;Mac : &#8984; + s&lt;br&gt;Win : ctrl + s"><i class="icon-save"></i></button>
+      <button id="btnDL"   class="btn btn-small" rel="tooltip" title="save .html &lt;br&gt;Mac : &#8984; + shift + s&lt;br&gt;Win : ctrl + shift + s"><i class="icon-download-alt"></i></button>
+      <button id="btnConv" class="btn  btn-small btn-primary" rel="tooltip" title="convert &lt;br&gt;Mac : &#8984; + e&lt;br&gt;Win : ctrl + e"><i class="icon-caret-right"></i></button>
+    </span>
+  </div>
+  <div id="menu2">
+    <form class="form-inline">
+      <label class="checkbox"><input type="checkbox" id="autoReload"> Auto Reload</label>
+      <label class="checkbox"><input type="checkbox" id="enableShortcut"> Enable Shortcut Key</label>
+    </form>
   </div>
   <a id="githubribbon" href="https://github.com/georgeosddev/markdown-edit" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
   </header><!-- /header -->
   <section id="main">
+    <div id="alertMessage" class="alert alert-block alert-error fade out display-none">
+      <a class="close" data-dismiss="alert" href="#">&times;</a>
+      <p></p>
+    </div>
     <textarea id="in">
 # Markdown Edit
 
