@@ -4,7 +4,8 @@ window.application = {
   apiLimit:1500,
   enabeAutoReload:false,
   enableShortcut:false,
-  md:""
+  md:"",
+  viewer:""
 };
 window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
 
@@ -247,6 +248,7 @@ function convert(){
     $("#out").addClass("display-none");
     setTimeout(function(){
       $("#out").append(data).fadeIn();
+      if(application.viewer) application.viewer.location.reload();
     },500);    
   })
   .fail(function(data){
@@ -279,5 +281,11 @@ function showAlert(msg){
       $(self).addClass("display-none")
     },500);
   });
+}
+
+// open view window
+function openViewer(){
+  if(application.viewer) application.viewer.close();
+  application.htmlViewer = open('view.html','_blank','width=800,height=800,titlebar=no,toolbar=no,scrollbar=yes');
 }
 
