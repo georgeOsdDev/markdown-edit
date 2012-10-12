@@ -53,18 +53,24 @@ body {
 }
 
 #in {
-  width:45%;
-  height:1000px;
   float: left;
   margin-left:5px;
 }
-
+@media screen and (min-width: 760px) {
+  #in {
+    width:45%;
+    height:1000px;
+  }
+}
 #out {
-  width:50%;
   float:left;
   margin-left: 30px;
   padding:5px;
 }
+@media screen and (min-width: 760px) {
+  #out {
+    width:50%;
+  }
 
 #progress {
   z-index:5px;

@@ -8,10 +8,16 @@ https://raw.github.com/marijnh/CodeMirror/master/lib/codemirror.css
   line-height: 1em;
   font-family: monospace;
   position: relative;
-  width: 45%;
-  height: 500px;
   float: left;
   margin-left: 5px;
+  width: 100%;
+}
+
+@media screen and (min-width: 760px) {
+  .CodeMirror {
+    width: 45%;
+    height: 500px;
+  }
 }
 
 .activeline {background: #e8f2ff !important;}
