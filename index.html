@@ -1,0 +1,267 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="title" content="Markdown Edit">
+  <meta name="author" content="Takeharu.Oshida">
+  <meta name="email" content="georgeosddev@email.com">
+  <meta name="description" content="online markdown editor with realtime html preview.">
+  <meta name="keywords" content="markdown, github, github-flavored-markdown, FileAPI, codemirror, george_osd">
+
+  <title>Markdown Edit</title>
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="stylesheet" href="vendor/html5-boilerplate-4.0.0/css/normalize.css">
+  <link rel="stylesheet" href="vendor/bootstrap-2.1.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="vendor/font-awesome-2.0/css/font-awesome.css">
+  <link rel="stylesheet" href="css/codemirror-custom.css">
+  <link rel="stylesheet" href="css/github-style.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="vendor/html5-boilerplate-4.0.0/js/vendor/modernizr-2.6.1.min.js"></script>
+
+</head>
+<body>
+  <header id="header">
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <a class="brand" href="#" ><i class="icon-edit"></i>&nbsp;Markdown Edit</a>
+      <form class="navbar-form pull-left">
+        <button id="btnConv" class="btn  btn-small btn-inverse" rel="tooltip" title="convert &lt;br&gt;Mac : &#8984; + e&lt;br&gt;Win : ctrl + e"><i class="icon-caret-right"></i>&nbsp;convert</button>&nbsp;
+        <span id="menu1" class="input-append">
+          <input id="lefile" type="file" style="display:none">
+          <input id="fileinput" class="input-large" type="text" placeholder="set your local file">
+          <button id="btnBrowse" class="btn btn-small" rel="tooltip" title="browse file &lt;br&gt;Mac : &#8984; + o&lt;br&gt;Win : ctrl + o"><i class="icon-folder-open"></i></button>
+          <button id="btnRead" class="btn btn-small" rel="tooltip" title="read file &lt;br&gt;Mac : &#8984; + r&lt;br&gt;Win : ctrl + r"><i class="icon-refresh"></i></button>
+        </span>&nbsp;
+        <span id="menu2" class="btn-group">
+          <button id="btnRawMd" class="btn btn-small" rel="tooltip" title="view Raw .md &lt;br&gt;Mac : &#8984; + m&lt;br&gt;Win : ctrl + m">Raw .md</button>
+          <button id="btnRawHtml"   class="btn btn-small" rel="tooltip" title="view Raw .html &lt;br&gt;Mac : &#8984; + h&lt;br&gt;Win : ctrl + h">Raw .html</button>
+          <button id="btnHtml"   class="btn btn-small" rel="tooltip" title="view html on other window &lt;br&gt;Mac : &#8984; + alt + h&lt;br&gt;Win : ctrl + alt + h">&nbsp;.html&nbsp;</button>
+        </span>
+      </form>
+      <form id="menu3">
+        <label class="checkbox"><input type="checkbox" id="autoReload"> Auto Reload</label>
+        <label class="checkbox"><input type="checkbox" id="enableShortcut"> Enable Shortcut Key</label>
+      </form>
+    </div>
+  </div>
+  <a id="githubribbon" href="https://github.com/georgeosddev/markdown-edit" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;z-index: 1040" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+  </header><!-- /header -->
+  <section id="main">
+    <div id="alertMessage" class="alert alert-block alert-error fade out display-none">
+      <a class="close" data-dismiss="alert" href="#">&times;</a>
+      <p></p>
+    </div>
+    <textarea id="in">
+# [Markdown Edit](http://georgeosddev.github.com/markdown-edit)
+
+This is a online markdown editor/viewer.<br>
+This help you to edit markdown document with the power of web technology.
+
+![Screen Shot](images/ScreenShot.png)
+
+## Quick Start
+
+Try on [Demo](http://georgeosddev.github.com/markdown-edit) page.<br>
+Or Install on your local PC. Check [Guide](#on-your-local-pc) to how to install.
+
+## Feature
+### Editor
+Part of Editor is depend on [CodeMirror](http://codemirror.net/).It enabeles
+
+* Display **line number**.
+* **Match Brackets** in the document.
+* Visible `Tab` key
+* **Highlight syntax** of markdown.
+* **Drag and Drop** file read.
+
+For more option, see [programming API](http://codemirror.net/doc/manual.html) of CodeMirror, and Hack [Markdown Edit](http://github.com/georgeosddev/markdown-edit)
+  
+### Converter
+To Convert markdown to html, Markdown-Edit use [Github's API](http://developer.github.com/v3/markdown/#render-a-markdown-document-in-raw-mode).
+
+> The raw API is not JSON-based. It takes a Markdown document as plaintext `text/plain` or `text/x-markdown` and renders it as plain Markdown without a repository context (just like a README.md file is rendered – this is the simplest way to preview a readme online).
+
+For more infomation, See official Guide 
+* [GitHub API v3](http://developer.github.com/v3/markdown/)
+* [github-flavored-markdown](http://github.github.com/github-flavored-markdown/)
+
+*NOTICE* : [GitHub API v3](http://developer.github.com/v3/#rate-limiting) is limited 5000requests per hour. <br>
+
+### Viewer
+To display converted HTML like Github, Markdown-Edit apply github-style.css.(This css is based on [github/gollum](https://raw.github.com/github/gollum/master/lib/gollum/frontend/public/gollum/css/template.css)) and [Font Awesome](http://fortawesome.github.com/Font-Awesome/).
+
+```html
+&lt;link rel="stylesheet" href="vendor/font-awesome-2.0/css/font-awesome.css"&gt;
+&lt;link rel="stylesheet" href="css/github-style.css"&gt;
+```
+
+If you want to see law html what [Github's API](http://developer.github.com/v3/markdown/#render-a-markdown-document-in-raw-mode) responsed, click `Raw .html` button on navbar.
+
+## Getting Started
+
+### Install On your local PC
+
+#### Download Sources
+
+use git
+
+```bash
+git clone http://github.com/georegeosddev/markdown-edit.git
+```
+
+Or download from [Here](https://github.com/georgeOsdDev/markdown-edit/zipball/master)
+
+#### Deploy to some web server
+To avoid ajax error yous should deploy whole files to some web server.
+
+If you are using mac,
+```bash
+ln -s /path/to/markdown-edit ~/Sites/markdown-edit
+```
+Then access http://localhost/~usernamehere/markdown-edit
+
+If you have installed python,this way is very easy.
+```bash
+cd /path/to/markdown-edit
+python -m SimpleHTTPServer 4567
+```
+Then access http://localhost:4567
+
+*NOTICE* :[Google Chrome](https://www.google.com/intl/en/chrome/browser/) upper v22.0 is most desirable browser.
+
+### usage
+
+#### Read local file
+Only text file is enable to read.
+
+#### Save to local
+This feature is not implemented yet.<br>
+So view file in Raw, and copy it to clipboard,then past it to your file by your self.
+
+#### Auto Reload
+If you **checked** Auto Reload.<br>Document will convert into html per 5second if it was changed.
+
+#### shortcut keys
+If you **checked** Enable Shortcut Key.<br>These shortcut will be enable.
+
+* Exec convert<br>
+Mac : ```&#8984; + e```
+Win : ```ctrl + e```
+* Browse local file<br>
+Mac : ```&#8984; + o```
+Win : ```ctrl + o```
+* Read local file<br>
+Mac : ```&#8984; + r```
+Win : ```ctrl + r```
+* View Raw .md file<br>
+Mac : ```&#8984; + m```
+Win : ```ctrl + m```
+* View Raw .html file<br>
+Mac : ```&#8984; + h```
+Win : ```ctrl + h```
+* View html in other window<br>
+Mac : ```&#8984; + alt + h```
+Win : ```ctrl + alt + h```
+
+If your are using chrome,
+* Enter Full Screen Mode<br>
+Mac : ```&#8984; + shift + f```
+Win : ```F11```
+
+
+### Markdown Syntax
+
+This app is based on [github-flavored-markdown](http://github.github.com/github-flavored-markdown/)&lt;br&gt;
+If you're not already familiar with Markdown, you should spend 15 minutes and go over the excellent [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/) at Daring Fireball.
+
+You can use markdown syntax and also pure html like this.
+
+###### Sample of Table for two
+-------------
+```
+ID  |Name|Rank
+----|----|----
+1   |Tom Preston-Werner |Awesome
+2   |Albert Einstein |Nearly as awesome
+```
+
+become
+
+ID  |Name|Rank
+----|----|----
+1   |Tom Preston-Werner |Awesome
+2   |Albert Einstein |Nearly as awesome
+
+and
+
+```html
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;ID&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Rank&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;1&lt;/td&gt;&lt;td&gt;Tom Preston-Werner&lt;/td&gt;&lt;td&gt;Awesome&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;2&lt;/td&gt;&lt;td&gt;Albert Einstein&lt;/td&gt;&lt;td&gt;Nearly as awesome&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+```
+
+also become
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;ID&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Rank&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;1&lt;/td&gt;&lt;td&gt;Tom Preston-Werner&lt;/td&gt;&lt;td&gt;Awesome&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;2&lt;/td&gt;&lt;td&gt;Albert Einstein&lt;/td&gt;&lt;td&gt;Nearly as awesome&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+
+## Special Thanks
+ * [CodeMirror](http://codemirror.net/).
+ * [Github](http://developer.github.com/) for API and style.
+ * [Twitter Bootstrap](http://twitter.github.com/bootstrap/) with [Font Awesome](http://fortawesome.github.com/Font-Awesome/).
+ * [HTML5 ★ BOILERPLATE](http://html5boilerplate.com/).
+ * [jQuery](http://jquery.com/).
+ * [HTML5 ROCKS](http://www.html5rocks.com/en/tutorials/file/xhr2/) for usage of BLOB.
+
+## Licence
+
+Source code can be found on [github](https://github.com/georgeOsdDev/markdown-edit), licenced under [MIT](http://opensource.org/licenses/mit-license.php).
+
+Developed by [Takeharu.Oshida](http://about.me/takeharu.oshida)
+
+    </textarea>
+    <div id="out" class="markdown-body"></div><!-- /converted html will be here -->
+    <div class="clear"></div>
+  </section>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script src='vendor/bootstrap-2.1.1/js/bootstrap.min.js'></script>
+  <script src="vendor/codemirror-2.34/lib/codemirror.js"></script>
+  <script src="vendor/codemirror-2.34/lib/util/overlay.js"></script>
+  <script src="vendor/codemirror-2.34/mode/xml/xml.js"></script>
+  <script src="vendor/codemirror-2.34/mode/markdown/markdown.js"></script>
+  <script src="vendor/codemirror-2.34/mode/gfm/gfm.js"></script>
+  <script src="vendor/codemirror-2.34/mode/javascript/javascript.js"></script>
+  <script src="javascript/scrollTop.js"></script>
+  <script src="javascript/app.js"></script>
+  <!--script>var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-XXXXXXXX-XX']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script-->
+</body>
+</html>
