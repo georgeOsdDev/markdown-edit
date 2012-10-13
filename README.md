@@ -37,8 +37,8 @@ For more infomation, See official Guide
 To display converted HTML like Github, Markdown-Edit apply github-style.css.(This css is based on [github/gollum](https://raw.github.com/github/gollum/master/lib/gollum/frontend/public/gollum/css/template.css)) and [Font Awesome](http://fortawesome.github.com/Font-Awesome/).
 
 ```html
-&lt;link rel="stylesheet" href="vendor/font-awesome-2.0/css/font-awesome.css"&gt;
-&lt;link rel="stylesheet" href="css/github-style.css"&gt;
+<link rel="stylesheet" href="vendor/font-awesome-2.0/css/font-awesome.css">
+<link rel="stylesheet" href="css/github-style.css">
 ```
 
 If you want to see law html what [Github's API](http://developer.github.com/v3/markdown/#render-a-markdown-document-in-raw-mode) responsed, click `Raw .html` button on navbar.
@@ -91,27 +91,27 @@ If you **checked** Auto Reload.<br>Document will convert into html per 5second i
 If you **checked** Enable Shortcut Key.<br>These shortcut will be enable.
 
 * Exec convert<br>
-Mac : ```&#8984; + e```
+Mac : ```⌘ + e```
 Win : ```ctrl + e```
 * Browse local file<br>
-Mac : ```&#8984; + o```
+Mac : ```⌘ + o```
 Win : ```ctrl + o```
 * Read local file<br>
-Mac : ```&#8984; + r```
+Mac : ```⌘ + r```
 Win : ```ctrl + r```
 * View Raw .md file<br>
-Mac : ```&#8984; + m```
+Mac : ```⌘ + m```
 Win : ```ctrl + m```
 * View Raw .html file<br>
-Mac : ```&#8984; + h```
+Mac : ```⌘ + h```
 Win : ```ctrl + h```
 * View html in other window<br>
-Mac : ```&#8984; + alt + h```
+Mac : ```⌘ + ⌥ + h```
 Win : ```ctrl + alt + h```
 
 If your are using chrome,
 * Enter Full Screen Mode<br>
-Mac : ```&#8984; + shift + f```
+Mac : ```⌘ + ⇧ + f```
 Win : ```F11```
 
 
@@ -141,32 +141,32 @@ ID  |Name|Rank
 and
 
 ```html
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;ID&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Rank&lt;/th&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;1&lt;/td&gt;&lt;td&gt;Tom Preston-Werner&lt;/td&gt;&lt;td&gt;Awesome&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;2&lt;/td&gt;&lt;td&gt;Albert Einstein&lt;/td&gt;&lt;td&gt;Nearly as awesome&lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
+<table>
+  <tr>
+    <th>ID</th><th>Name</th><th>Rank</th>
+  </tr>
+  <tr>
+    <td>1</td><td>Tom Preston-Werner</td><td>Awesome</td>
+  </tr>
+  <tr>
+    <td>2</td><td>Albert Einstein</td><td>Nearly as awesome</td>
+  </tr>
+</table>
 ```
 
 also become
 
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;ID&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Rank&lt;/th&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;1&lt;/td&gt;&lt;td&gt;Tom Preston-Werner&lt;/td&gt;&lt;td&gt;Awesome&lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-    &lt;td&gt;2&lt;/td&gt;&lt;td&gt;Albert Einstein&lt;/td&gt;&lt;td&gt;Nearly as awesome&lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
+<table>
+  <tr>
+    <th>ID</th><th>Name</th><th>Rank</th>
+  </tr>
+  <tr>
+    <td>1</td><td>Tom Preston-Werner</td><td>Awesome</td>
+  </tr>
+  <tr>
+    <td>2</td><td>Albert Einstein</td><td>Nearly as awesome</td>
+  </tr>
+</table>
 
 
 ## Special Thanks
