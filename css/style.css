@@ -87,4 +87,9 @@ body {
 
 .alert {
   margin:5px 5px;
-}
+ }
+
+.alert .close {
+  float: left;
+  right: 0px;
+ }
