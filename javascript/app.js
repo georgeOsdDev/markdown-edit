@@ -7,7 +7,7 @@ window.application = {
   md:"",
   viewer:""
 };
-window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
+window.URL = window.URL || window.webkitURL;
 
 // Dom Ready
 $(function(){
@@ -16,17 +16,6 @@ $(function(){
   $("#lefile").change(function() {
      $('#fileinput').val($(this).val());
   }); 
-
-  // drag drop
-  // $("#in").bind("ondrop",function(event){
-  //   event.preventDefault();
-  //   var file = event.dataTransfer.files[0];
-  //   $('#fileinput').val(f.name);
-  //   readFile(file);
-  // })
-  // .bind("ondragover",function(event){
-  //   event.preventDefault();
-  // });
 
   // button binding
   $(".btn").each(function(){
@@ -60,8 +49,8 @@ $(function(){
       ,alt = event.altKey
       ,shift = event.shiftKey
       ,cmd = event.metaKey;
-      // browse file `ctrl + b`
-      if ((ctrl || cmd) && code == 66) {
+      // browse file `ctrl + o`
+      if ((ctrl || cmd) && code == 79) {
         event.preventDefault();
         $("#lefile").click();
         return;
@@ -72,16 +61,22 @@ $(function(){
         readFile();
         return;
       }
-      // save .md file `ctrl + s`
-      if ((ctrl || cmd) && !shift && code == 83) {
+      // raw .md file `ctrl + m`
+      if ((ctrl || cmd) && code == 77) {
         event.preventDefault();
-        saveFile("md");
+        viewRaw("md");
         return;
       }
-      // save .html file `ctrl + shift + s`
-      if ((ctrl || cmd) && shift && code == 83) {
+      // raw .html file `ctrl + alt + h`
+      if ((ctrl || cmd) && !alt && code == 72) {
         event.preventDefault();
-        saveFile("html");
+        viewRaw("html");
+        return;
+      }
+      // view .html file `ctrl + alt + h`
+      if ((ctrl || cmd) && alt && code == 72) {
+        event.preventDefault();
+        openViewer();
         return;
       }
       // exec convert `ctrl + e`
@@ -126,13 +121,17 @@ function handleOnClick(id){
       // read local file    
       readFile();
     break;    
-    case "btnSave":
-      // show .md file    
-      saveFile("md");
+    case "btnRawMd":
+      // show Raw .md file    
+      viewRaw("md");
     break;
-    case "btnDl":
-      // save .html file
-      saveFile("html");
+    case "btnRawHtml":
+      // show Raw .html file
+      viewRaw("html");
+    break;
+    case "btnHtml":
+      // view .html
+      openViewer();
     break;
     case "btnConv":
       // exec convert  
@@ -169,9 +168,9 @@ function readFile(f){
   // console.log("start read");
 }
 
-// save file to local
-function saveFile(file){
-  var text,blobBuilder,fileName;
+// save file to data url
+function viewRaw(file){
+  var text,blobBuilder,blob;
   switch (file) {
     case "md":
       text = application.editor.getValue();
@@ -183,30 +182,8 @@ function saveFile(file){
       console.log("invalid param");
       return;
   }
-  var dd = new Date();
-  filename = dd.getMilliseconds() + "." + file;
-  if ("MozBlobBuilder" in window) {
-    blobBuilder = new MozBlobBuilder();
-  } else if ("WebKitBlobBuilder" in window) {
-    blobBuilder = new WebKitBlobBuilder();
-  }
-  blobBuilder.append(text);
-
-  function onInitFs(fs) {
-    fs.root.getFile(filename, {create: true}, function(fileEntry) {
-      fileEntry.createWriter(function(fileWriter) {
-        fileWriter.onwriteend = function(e) {
-          console.log('Write completed.');
-        };
-        fileWriter.onerror = function(e) {
-          console.log('Write failed: ' + e.toString());
-          showAlert("faild to write file");
-        };
-        fileWriter.write(blobBuilder.getBlob('text/plain'));
-      }, showAlert("faild to write file"));
-    }, showAlert("faild to write file"));
-  }
-  window.requestFileSystem(window.TEMPORARY, 1024*1024, onInitFs);
+  blob = new Blob([text], {type: "text/plain",charset:"utf-8"});
+  window.open(window.URL.createObjectURL(blob),"_blank","width=800,height=800,titlebar=no,toolbar=yes,scrollbar=yes")
 }
 
 // exec auto reload per 5(sec) if markdown was changed
