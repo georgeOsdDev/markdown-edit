@@ -3,35 +3,44 @@ style for application
 */
 
 body {
-  margin-top:10px;
+  margin-top:50px;
 }
 
-.header {
-  bottom: 0px;
-  padding: 5px 0;
-  margin-top: 5px;
+.navbar .brand {
   margin-left: 5px;
-  text-align: left;
+  margin-top: 2px;
 }
 
-.header h2 {
-  line-height: 20px;
+.navbar form {
+  margin-top: 5px;
+  margin-bottom: 0px;
 }
 
-.header small {
-  font-size: 40%;
+#btnConv {
+  margin-top: 0px;
 }
 
-.header p {
-  margin-bottom: 0;
+#menu1 input, #menu1 .btn, #menu2 .btn {
+  margin-top: 5px;
 }
 
-.header #menu1 input {
+#menu1 input {
   height: 16px;
 }
 
-.header form {
-  margin-bottom: 0px;
+#menu3 label {
+  min-height: 12px;
+  max-height: 12px;
+  margin-top: 2px;
+}
+#menu3 input {
+  margin-left: 10px;
+}
+
+@media all and (max-width: 760px) {
+  #menu1,#menu2,#menu3{
+    display: none;
+  }
 }
 
 .clear {
@@ -56,7 +65,7 @@ body {
   float: left;
   margin-left:5px;
 }
-@media screen and (min-width: 760px) {
+@media all and (min-width: 760px) {
   #in {
     width:45%;
     height:1000px;
@@ -67,7 +76,7 @@ body {
   margin-left: 30px;
   padding:5px;
 }
-@media screen and (min-width: 760px) {
+@media all and (min-width: 760px) {
   #out {
     width:50%;
   }
