@@ -26,7 +26,8 @@ $(function(){
           delay: { show: 100, hide: 100 }
       });
     })
-    .bind("click",function(){
+    .bind("click",function(event){
+      event.preventDefault();
       handleOnClick($(self).attr("id"));
     });
   });
