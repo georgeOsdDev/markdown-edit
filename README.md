@@ -3,7 +3,7 @@
 This is a online markdown editor/viewer.<br>
 This help you to edit markdown document with the power of web technology.
 
-![Screen Shot](images/ScreenShot.png)
+![Screen Shot](https://raw.github.com/georgeOsdDev/markdown-edit/master/images/ScreenShot.png)
 
 ## Quick Start
 
