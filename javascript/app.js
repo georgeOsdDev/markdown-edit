@@ -27,6 +27,7 @@ $(function(){
       });
     })
     .bind("click",function(){
+      event.preventDefault();
       handleOnClick($(self).attr("id"));
     });
   });
