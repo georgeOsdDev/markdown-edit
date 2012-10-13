@@ -18,6 +18,16 @@ https://raw.github.com/github/gollum/master/lib/gollum/frontend/public/gollum/cs
 .markdown-body>*:last-child {
   margin-bottom: 0!important;
 }
+
+.markdown-body a {
+  color:#4183C4;
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
 .markdown-body a.absent {
   color: #c00;
 }
@@ -130,7 +140,7 @@ https://raw.github.com/github/gollum/master/lib/gollum/frontend/public/gollum/cs
 .markdown-body li,
 .markdown-body table,
 .markdown-body pre {
-  margin: 15px 0;
+  /*margin: 15px 0;*/
 }
 .markdown-body hr {
   background: transparent url(../images/dirty-shade.png) repeat-x 0 0;
