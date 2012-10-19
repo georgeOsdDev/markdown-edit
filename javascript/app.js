@@ -5,7 +5,8 @@ window.application = {
   enabeAutoReload:false,
   enableShortcut:false,
   md:"",
-  viewer:""
+  viewer:"",
+  db:localStorage
 };
 window.URL = window.URL || window.webkitURL;
 
@@ -108,6 +109,12 @@ $(function(){
   });
   var hlLine = application.editor.setLineClass(0, "activeline");
 
+  // read cache
+  var cache = application.db.getItem("#in");
+  if (cache){
+    $("#in").val = cache;
+    application.editor.setValue(cache);
+  }
   // Initialize html view
   convert();
 })
@@ -202,6 +209,7 @@ function convert(){
   // save CodeMirror to textarea
   application.editor.save();
   application.md = $("#in").val();
+  application.db.setItem("#in",application.md);
 
   // hide html
   $("#out").fadeOut().empty();
@@ -264,6 +272,6 @@ function showAlert(msg){
 // open view window
 function openViewer(){
   if(application.viewer) application.viewer.close();
-  application.htmlViewer = open('view.html','_blank','width=800,height=800,titlebar=no,toolbar=no,scrollbar=yes');
+  application.viewer = open('view.html','_blank','width=800,height=800,titlebar=no,toolbar=no,scrollbar=yes');
 }
 
