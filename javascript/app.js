@@ -7,7 +7,7 @@ window.application = {
   md:"",
   viewer:"",
   db:localStorage,
-  converter:"githubAPI",
+  converter:"marked", // default converter is `marked`
   isRendering:false
 };
 window.URL = window.URL || window.webkitURL;
