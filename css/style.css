@@ -28,6 +28,9 @@ body {
   height: 16px;
 }
 
+#menu3 {
+  float: left;
+}
 #menu3 label {
   min-height: 12px;
   max-height: 12px;
@@ -37,8 +40,17 @@ body {
   margin-left: 10px;
 }
 
+#menu4 label {
+  min-height: 12px;
+  max-height: 12px;
+  padding-top: 1px;
+}
+#menu4 input {
+  margin-left: 10px;
+}
+
 @media all and (max-width: 760px) {
-  #menu1,#menu2,#menu3{
+  #menu1,#menu2,#menu3,#menu4{
     display: none;
   }
 }

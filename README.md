@@ -23,7 +23,7 @@ Part of Editor is depend on [CodeMirror](http://codemirror.net/).It enabeles
 For more option, see [programming API](http://codemirror.net/doc/manual.html) of CodeMirror, and Hack [Markdown Edit](http://github.com/georgeosddev/markdown-edit)
   
 ### Converter
-To Convert markdown to html, Markdown-Edit use [Github's API](http://developer.github.com/v3/markdown/#render-a-markdown-document-in-raw-mode).
+To Convert markdown to html, Markdown-Edit Use [Github's API](http://developer.github.com/v3/markdown/#render-a-markdown-document-in-raw-mode) as default.
 
 > The raw API is not JSON-based. It takes a Markdown document as plaintext `text/plain` or `text/x-markdown` and renders it as plain Markdown without a repository context (just like a README.md file is rendered – this is the simplest way to preview a readme online).
 
@@ -31,14 +31,22 @@ For more infomation, See official Guide
 * [GitHub API v3](http://developer.github.com/v3/markdown/)
 * [github-flavored-markdown](http://github.github.com/github-flavored-markdown/)
 
-*NOTICE* : [GitHub API v3](http://developer.github.com/v3/#rate-limiting) is limited 5000requests per hour. <br>
+*NOTICE* : [GitHub API v3](http://developer.github.com/v3/#rate-limiting) is limited 5000requests per hour.
+
+#### Option: Use [marked](https://github.com/chjj/marked) as conveter.
+If you checked radio `Use marked for conveter` **markdown-edit** use [marked](https://github.com/chjj/marked) and [highlight.js](http://softwaremaniacs.org/soft/highlight/en/) instad of Github's API.<br>
+It is faster than API call and make you enable to use this app at offline.<br>
+*NOTICE* : [marked](https://github.com/chjj/marked) does not support GFM Tables and Anchor.
+
 
 ### Viewer
 To display converted HTML like Github, Markdown-Edit apply github-style.css.(This css is based on [github/gollum](https://raw.github.com/github/gollum/master/lib/gollum/frontend/public/gollum/css/template.css)) and [Font Awesome](http://fortawesome.github.com/Font-Awesome/).
+And [github.css from highlight.js](http://softwaremaniacs.org/media/soft/highlight/test.html) will apply when it was converted by *marked*.
 
 ```html
 <link rel="stylesheet" href="vendor/font-awesome-2.0/css/font-awesome.css">
 <link rel="stylesheet" href="css/github-style.css">
+<link rel="stylesheet" href="vendor/highlight.js/styles/github.css">
 ```
 
 If you want to see law html what [Github's API](http://developer.github.com/v3/markdown/#render-a-markdown-document-in-raw-mode) responsed, click `Raw .html` button on navbar.
@@ -117,13 +125,14 @@ Win : ```F11```
 
 ### Markdown Syntax
 
-This app is based on [github-flavored-markdown](http://github.github.com/github-flavored-markdown/)&lt;br&gt;
+This app is based on [github-flavored-markdown](http://github.github.com/github-flavored-markdown/)<br>
 If you're not already familiar with Markdown, you should spend 15 minutes and go over the excellent [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/) at Daring Fireball.
 
 You can use markdown syntax and also pure html like this.
 
 ###### Sample of Table for two
 -------------
+
 ```
 ID  |Name|Rank
 ----|----|----
@@ -137,6 +146,8 @@ ID  |Name|Rank
 ----|----|----
 1   |Tom Preston-Werner |Awesome
 2   |Albert Einstein |Nearly as awesome
+
+*NOTICE* [marked](https://github.com/chjj/marked) does not support GFM Tables.
 
 and
 
@@ -169,13 +180,17 @@ also become
 </table>
 
 
+
 ## Special Thanks
  * [CodeMirror](http://codemirror.net/).
  * [Github](http://developer.github.com/) for API and style.
+ * [marked](https://github.com/chjj/marked).
+ * [highlight.js](http://softwaremaniacs.org/soft/highlight/en/).
  * [Twitter Bootstrap](http://twitter.github.com/bootstrap/) with [Font Awesome](http://fortawesome.github.com/Font-Awesome/).
  * [HTML5 ★ BOILERPLATE](http://html5boilerplate.com/).
  * [jQuery](http://jquery.com/).
  * [HTML5 ROCKS](http://www.html5rocks.com/en/tutorials/file/xhr2/) for usage of BLOB.
+ * [balupton](https://github.com/balupton).
 
 ## Licence
 

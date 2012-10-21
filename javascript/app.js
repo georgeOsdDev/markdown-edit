@@ -6,9 +6,16 @@ window.application = {
   enableShortcut:false,
   md:"",
   viewer:"",
-  db:localStorage
+  db:localStorage,
+  converter:"githubAPI"
 };
 window.URL = window.URL || window.webkitURL;
+
+marked.setOptions({
+  gfm: true,
+  pedantic: false,
+  sanitize: false
+});
 
 // Dom Ready
 $(function(){
@@ -35,13 +42,20 @@ $(function(){
 
   // checkbox binding
   $("#autoReload").change(function() {
-     application.enabeAutoReload = ($(this).attr("checked") === "checked");
-     autoReload();
+    application.enabeAutoReload = ($(this).attr("checked") === "checked");
+    autoReload();
   });
 
   // checkbox binding
   $("#enableShortcut").change(function() {
-     application.enableShortcut = ($(this).attr("checked") === "checked");
+    application.enableShortcut = ($(this).attr("checked") === "checked");
+  }); 
+
+
+  // checkbox binding
+  $('[name="optionsConverter"]').change(function() {
+    application.converter = $(this).val();
+    convert();
   }); 
 
   $("body").keydown( function(event) {
@@ -212,39 +226,63 @@ function convert(){
   application.db.setItem("#in",application.md);
 
   // hide html
-  $("#out").fadeOut().empty();
-  
-  // call github's API
-  $.ajax({
-    "url":"https://api.github.com/markdown/raw",
-    "type":"POST",
-    "contentType":"text/plain",
-    "data":application.md,
-    "complete":function(jqXHR, textStatus){
-      // api limit count
-      application.apiLimit = jqXHR.getResponseHeader("X-RateLimit-Remaining");
-      if (application.apiLimit < 50) {
-        showAlert("X-RateLimit-Remaining is less than 50. It was limited 5000 request per hour from same IP");
-      }
-    }
-  })
-  .done(function(data){
-    // console.log("done");
-    // render html data
+  $("#out").fadeOut("fast").empty();
+
+  var convertCallback = function(data,opttionCallback){
     $("#out").addClass("display-none");
     setTimeout(function(){
+      // Issue2 https://github.com/georgeOsdDev/markdown-edit/issues/2
+      // Use marked.js instead of github API
       $("#out").append(data).fadeIn();
+      opttionCallback();
       if(application.viewer) application.viewer.location.reload();
-    },500);    
-  })
-  .fail(function(data){
-    // console.log("fail");
-    showAlert("failed to ajax request. Try again.");
-  })
-  .always(function(data){
-    // console.log("always");
-    // do nothing.
-  })
+    },200);
+  }
+  console.log(application.converter);
+  switch (application.converter) {
+    case "githubAPI":
+      // call github's API
+      $.ajax({
+        "url":"https://api.github.com/markdown/raw",
+        "type":"POST",
+        "contentType":"text/plain",
+        "data":application.md,
+        "complete":function(jqXHR, textStatus){
+          // api limit count
+          application.apiLimit = jqXHR.getResponseHeader("X-RateLimit-Remaining");
+          if (application.apiLimit < 50) {
+            showAlert("X-RateLimit-Remaining is less than 50. It was limited 5000 request per hour from same IP");
+          }
+        }
+      })
+      .done(function(data){
+        // console.log("done");
+        // render html data
+        convertCallback(data,function(){
+        // $("#out").addClass("markdown-body");
+        });
+      })
+      .fail(function(data){
+        // console.log("fail");
+        showAlert("failed to ajax request. Try again.");
+      })
+      .always(function(data){
+        // console.log("always");
+        // do nothing.
+      });
+    break;
+    case "marked":
+      // user marked.js
+      var data = marked(application.md);
+      convertCallback(data,function(){
+        // $("#out").removeClass("markdown-body");
+        $('#out pre code').each(function(i, e) {hljs.highlightBlock(e)});
+      });
+    break;
+    default:
+      console.log("invalid param");
+      return;
+  }
 }
 
 // showAlert
