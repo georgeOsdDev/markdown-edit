@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="vendor/font-awesome-2.0/css/font-awesome.css">
   <link rel="stylesheet" href="css/codemirror-custom.css">
   <link rel="stylesheet" href="css/github-style.css">
+  <link rel="stylesheet" href="vendor/highlight.js/styles/github.css">
   <link rel="stylesheet" href="css/style.css">
   <script src="vendor/html5-boilerplate-4.0.0/js/vendor/modernizr-2.6.1.min.js"></script>
 
@@ -45,6 +46,11 @@
         <label class="checkbox"><input type="checkbox" id="autoReload"> Auto Reload</label>
         <label class="checkbox"><input type="checkbox" id="enableShortcut"> Enable Shortcut Key</label>
       </form>
+      <form id="menu4">
+        <label class="radio"><input type="radio" name="optionsConverter" id="optionsConverter1" value="githubAPI" checked>&nbsp;Use Github API for converter</label>
+        <label class="radio"><input type="radio" name="optionsConverter" id="optionsConverter2" value="marked">&nbsp;Use <a href="https://github.com/chjj/marked">marked</a> for conveter</label>
+      </form>
+      <div class="clear"></div>
     </div>
   </div>
   <a id="githubribbon" href="https://github.com/georgeosddev/markdown-edit" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;z-index: 1040" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
@@ -60,7 +66,7 @@
 This is a online markdown editor/viewer.<br>
 This help you to edit markdown document with the power of web technology.
 
-![Screen Shot](images/ScreenShot.png)
+[![Screen Shot](images/ScreenShot.png)](http://georgeosddev.github.com/markdown-edit)
 
 ## Quick Start
 
@@ -80,22 +86,26 @@ Part of Editor is depend on [CodeMirror](http://codemirror.net/).It enabeles
 For more option, see [programming API](http://codemirror.net/doc/manual.html) of CodeMirror, and Hack [Markdown Edit](http://github.com/georgeosddev/markdown-edit)
   
 ### Converter
-To Convert markdown to html, Markdown-Edit use [Github's API](http://developer.github.com/v3/markdown/#render-a-markdown-document-in-raw-mode).
-
-> The raw API is not JSON-based. It takes a Markdown document as plaintext `text/plain` or `text/x-markdown` and renders it as plain Markdown without a repository context (just like a README.md file is rendered – this is the simplest way to preview a readme online).
-
+To Convert markdown to html, Markdown-Edit Use [Github's API](http://developer.github.com/v3/markdown/#render-a-markdown-document-in-raw-mode) as default.<br>
 For more infomation, See official Guide 
 * [GitHub API v3](http://developer.github.com/v3/markdown/)
 * [github-flavored-markdown](http://github.github.com/github-flavored-markdown/)
 
-*NOTICE* : [GitHub API v3](http://developer.github.com/v3/#rate-limiting) is limited 5000requests per hour. <br>
+*NOTICE* : [GitHub API v3](http://developer.github.com/v3/#rate-limiting) is limited 5000requests per hour.
+
+#### Option: Use [marked](https://github.com/chjj/marked) as conveter.
+If you checked radio `Use marked for conveter` **markdown-edit** use [marked](https://github.com/chjj/marked) and [highlight.js](http://softwaremaniacs.org/soft/highlight/en/) instad of Github's API.<br>
+It is faster than API call and make you enable to use this app at offline.<br>
+*NOTICE* : [marked](https://github.com/chjj/marked) does not support GFM Tables and Anchor.
+
 
 ### Viewer
-To display converted HTML like Github, Markdown-Edit apply github-style.css.(This css is based on [github/gollum](https://raw.github.com/github/gollum/master/lib/gollum/frontend/public/gollum/css/template.css)) and [Font Awesome](http://fortawesome.github.com/Font-Awesome/).
+To display converted HTML like Github, Markdown-Edit apply github.css from highlight.js.
 
 ```html
 &lt;link rel="stylesheet" href="vendor/font-awesome-2.0/css/font-awesome.css"&gt;
 &lt;link rel="stylesheet" href="css/github-style.css"&gt;
+&lt;link rel="stylesheet" href="vendor/highlight.js/styles/github.css"&gt;
 ```
 
 If you want to see law html what [Github's API](http://developer.github.com/v3/markdown/#render-a-markdown-document-in-raw-mode) responsed, click `Raw .html` button on navbar.
@@ -174,13 +184,14 @@ Win : ```F11```
 
 ### Markdown Syntax
 
-This app is based on [github-flavored-markdown](http://github.github.com/github-flavored-markdown/)&lt;br&gt;
+This app is based on [github-flavored-markdown](http://github.github.com/github-flavored-markdown/)<br>
 If you're not already familiar with Markdown, you should spend 15 minutes and go over the excellent [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/) at Daring Fireball.
 
 You can use markdown syntax and also pure html like this.
 
 ###### Sample of Table for two
 -------------
+
 ```
 ID  |Name|Rank
 ----|----|----
@@ -194,6 +205,8 @@ ID  |Name|Rank
 ----|----|----
 1   |Tom Preston-Werner |Awesome
 2   |Albert Einstein |Nearly as awesome
+
+*NOTICE* [marked](https://github.com/chjj/marked) does not support GFM Tables.
 
 and
 
@@ -229,10 +242,13 @@ also become
 ## Special Thanks
  * [CodeMirror](http://codemirror.net/).
  * [Github](http://developer.github.com/) for API and style.
+ * [marked](https://github.com/chjj/marked).
+ * [highlight.js](http://softwaremaniacs.org/soft/highlight/en/).
  * [Twitter Bootstrap](http://twitter.github.com/bootstrap/) with [Font Awesome](http://fortawesome.github.com/Font-Awesome/).
  * [HTML5 ★ BOILERPLATE](http://html5boilerplate.com/).
  * [jQuery](http://jquery.com/).
  * [HTML5 ROCKS](http://www.html5rocks.com/en/tutorials/file/xhr2/) for usage of BLOB.
+ * [balupton](https://github.com/balupton).
 
 ## Licence
 
@@ -245,6 +261,7 @@ Developed by [Takeharu.Oshida](http://about.me/takeharu.oshida)
     <div class="clear"></div>
   </section>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="vendor/jquery-1.8.2/jquery.min.js"><\/script>')</script>
   <script src='vendor/bootstrap-2.1.1/js/bootstrap.min.js'></script>
   <script src="vendor/codemirror-2.34/lib/codemirror.js"></script>
   <script src="vendor/codemirror-2.34/lib/util/overlay.js"></script>
@@ -252,17 +269,19 @@ Developed by [Takeharu.Oshida](http://about.me/takeharu.oshida)
   <script src="vendor/codemirror-2.34/mode/markdown/markdown.js"></script>
   <script src="vendor/codemirror-2.34/mode/gfm/gfm.js"></script>
   <script src="vendor/codemirror-2.34/mode/javascript/javascript.js"></script>
+  <script src="vendor/marked/marked.js"></script>
+  <script src="vendor/highlight.js/highlight.pack.js"></script>
   <script src="javascript/scrollTop.js"></script>
   <script src="javascript/app.js"></script>
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-15502477-12']);
-  _gaq.push(['_trackPageview']);
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-15502477-12']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
 </body>
 </html>
