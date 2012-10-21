@@ -7,7 +7,8 @@ window.application = {
   md:"",
   viewer:"",
   db:localStorage,
-  converter:"githubAPI"
+  converter:"marked", // default converter is `marked`
+  isRendering:false
 };
 window.URL = window.URL || window.webkitURL;
 
@@ -220,6 +221,11 @@ function autoReload(){
 
 // convert markdown to html
 function convert(){
+  $("#alertMessage").alert("close");
+  if (application.md == application.editor.getValue()) return showAlert("Nothing was changed","alert-info");
+  if (application.isRendering) return showAlert("Now rendering","alert-info nowRendering");
+
+  application.isRendering = true;
   // save CodeMirror to textarea
   application.editor.save();
   application.md = $("#in").val();
@@ -229,16 +235,16 @@ function convert(){
   $("#out").fadeOut("fast").empty();
 
   var convertCallback = function(data,opttionCallback){
-    $("#out").addClass("display-none");
-    setTimeout(function(){
-      // Issue2 https://github.com/georgeOsdDev/markdown-edit/issues/2
-      // Use marked.js instead of github API
-      $("#out").append(data).fadeIn();
-      opttionCallback();
-      if(application.viewer) application.viewer.location.reload();
-    },200);
+    $("#out")
+    .addClass("display-none")
+    .append(data)
+    .fadeIn("fast");
+    opttionCallback();
+    application.isRendering = false;
+    $("#alertMessage .nowRendering").alert("close");
+    if(application.viewer) application.viewer.location.reload();
   }
-  console.log(application.converter);
+
   switch (application.converter) {
     case "githubAPI":
       // call github's API
@@ -268,7 +274,7 @@ function convert(){
       })
       .always(function(data){
         // console.log("always");
-        // do nothing.
+        application.isRendering = false;
       });
     break;
     case "marked":
@@ -286,11 +292,14 @@ function convert(){
 }
 
 // showAlert
-function showAlert(msg){
+function showAlert(msg,option){
+  $("#alertMessage").alert("close");
+  if(!option) option = "alert-error";
   $("#alertMessage>p").text(msg);
   $("#alertMessage")
   .removeClass("display-none")
   .removeClass("out")
+  .addClass(option)
   .addClass("in")
   .bind("close", function (evt) {
     evt.preventDefault();
@@ -301,9 +310,9 @@ function showAlert(msg){
   })
   .bind("closed", function () {
     var self = this;
-    setTimeout(function(){
-      $(self).addClass("display-none")
-    },500);
+    $(self)
+    .addClass("display-none")
+    .removeClass(option);
   });
 }
 
