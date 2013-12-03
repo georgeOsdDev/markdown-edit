@@ -49,7 +49,7 @@ And [github.css from highlight.js](http://softwaremaniacs.org/media/soft/highlig
 <link rel="stylesheet" href="vendor/highlight.js/styles/github.css">
 ```
 
-If you want to see law html what [Github's API](http://developer.github.com/v3/markdown/#render-a-markdown-document-in-raw-mode) responsed, click `Raw .html` button on navbar.
+If you want to see raw html what [Github's API](http://developer.github.com/v3/markdown/#render-a-markdown-document-in-raw-mode) responsed, click `Raw .html` button on navbar.
 
 ## Getting Started
 
