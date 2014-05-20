@@ -21,13 +21,13 @@ Part of Editor is depend on [CodeMirror](http://codemirror.net/).It enabeles
 * **Drag and Drop** file read.
 
 For more option, see [programming API](http://codemirror.net/doc/manual.html) of CodeMirror, and Hack [Markdown Edit](http://github.com/georgeosddev/markdown-edit)
-  
+
 ### Converter
 To Convert markdown to html, Markdown-Edit Use [Github's API](http://developer.github.com/v3/markdown/#render-a-markdown-document-in-raw-mode) as default.
 
 > The raw API is not JSON-based. It takes a Markdown document as plaintext `text/plain` or `text/x-markdown` and renders it as plain Markdown without a repository context (just like a README.md file is rendered – this is the simplest way to preview a readme online).
 
-For more infomation, See official Guide 
+For more infomation, See official Guide
 * [GitHub API v3](http://developer.github.com/v3/markdown/)
 * [github-flavored-markdown](http://github.github.com/github-flavored-markdown/)
 
@@ -61,6 +61,9 @@ use git
 
 ```bash
 git clone http://github.com/georegeosddev/markdown-edit.git
+cd markdown-edit
+npm install -g bower
+bower install
 ```
 
 Or download from [Here](https://github.com/georgeOsdDev/markdown-edit/zipball/master)
