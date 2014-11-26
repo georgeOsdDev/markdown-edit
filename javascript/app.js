@@ -29,13 +29,13 @@ $(function(){
   // button binding
   $(".btn, .input-group-addon").each(function(){
     var self = this;
-    $(self).bind("hover",function(){
+    $(self).on("hover",function(){
       $(self).tooltip({
         placement:"bottom",
         delay: { show: 100, hide: 100 }
       });
     })
-    .bind("click",function(event){
+    .on("click",function(event){
       event.preventDefault();
       handleOnClick($(self).attr("id"));
     });
@@ -161,6 +161,10 @@ function handleOnClick(id){
       // exec convert
       convert();
     break;
+    case "applyCss":
+      // apply css
+      applyCss();
+    break;
     default:
       console.log("Error:invalid case");
     break;
@@ -283,7 +287,7 @@ function convert(){
       var data = marked(application.md);
       convertCallback(data,function(){
         // $("#out").removeClass("markdown-body");
-        $('#out pre code').each(function(i, e) {hljs.highlightBlock(e)});
+        $('#out pre code').each(function(i, e) {hljs.highlightBlock(e);});
       });
     break;
     default:
@@ -323,3 +327,17 @@ function openViewer(){
   application.viewer = open('view.html','_blank','width=800,height=800,titlebar=no,toolbar=no,scrollbar=yes');
 }
 
+function applyCss(){
+  var button =  $("#applyCss");
+  var applying = button.text() !== "+";
+  if (applying){
+    $("#externalCssUri").val("");
+    $("#htmlStyle").attr("href", "css/empty.css");
+    button.text("+");
+  } else {
+    var resource = $("#externalCssUri").val();
+    if (!resource) return false;
+    $("#htmlStyle").attr("href", resource);
+    button.text("-");
+  }
+}

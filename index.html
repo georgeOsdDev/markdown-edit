@@ -17,9 +17,9 @@
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/codemirror-custom.css">
-  <link rel="stylesheet" href="css/github-style.css">
   <link rel="stylesheet" href="bower_components/highlightjs/styles/github.css">
   <link rel="stylesheet" href="css/style.css">
+  <link id = "htmlStyle" rel="stylesheet" href="css/empty.css">
   <script src="bower_components/modernizr/modernizr.js"></script>
 
 </head>
@@ -37,6 +37,13 @@
             <button id="btnRawMd" class="btn btn-small btn-default" rel="tooltip" title="view Raw .md &lt;br&gt;Mac : &#8984; + m&lt;br&gt;Win : ctrl + m"><i class="fa fa-pencil-square-o"></i>Raw .md</button>
             <button id="btnRawHtml" class="btn btn-small btn-default" rel="tooltip" title="view Raw .html &lt;br&gt;Mac : &#8984; + h&lt;br&gt;Win : ctrl + h"><i class="fa fa-file-code-o"></i>Raw .html</button>
             <button id="btnHtml" class="btn btn-small btn-default" rel="tooltip" title="view html on other window &lt;br&gt;Mac : &#8984; + alt + h&lt;br&gt;Win : ctrl + alt + h"><i class="fa fa-html5"></i>.html</button>
+          </div>
+
+          <div id="menu5" class="input-group pull-left">
+            <div class="input-group">
+              <input id="externalCssUri" class="form-control col-xs-6" type="text" placeholder="external css uri">
+              <span id="applyCss" class="btn input-group-addon" type="button" rel="tooltip" title="apply">+</span>
+            </div>
           </div>
 
           <div id="menu2" class="input-group pull-left">
