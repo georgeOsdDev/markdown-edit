@@ -13,50 +13,80 @@
 
   <title>Markdown Edit</title>
   <link rel="shortcut icon" href="favicon.ico">
-  <link rel="stylesheet" href="vendor/html5-boilerplate-4.0.0/css/normalize.css">
-  <link rel="stylesheet" href="vendor/bootstrap-2.1.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="vendor/font-awesome-2.0/css/font-awesome.css">
+  <link rel="stylesheet" href="bower_components/normalize-css/normalize.css">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/codemirror-custom.css">
-  <link rel="stylesheet" href="css/github-style.css">
-  <link rel="stylesheet" href="vendor/highlight.js/styles/github.css">
+  <link rel="stylesheet" href="bower_components/highlightjs/styles/github.css">
   <link rel="stylesheet" href="css/style.css">
-  <script src="vendor/html5-boilerplate-4.0.0/js/vendor/modernizr-2.6.1.min.js"></script>
+  <link id = "htmlStyle" rel="stylesheet" href="css/empty.css">
+  <script src="bower_components/modernizr/modernizr.js"></script>
 
 </head>
 <body>
   <header id="header">
-  <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-      <a class="brand" href="#" ><i class="icon-edit"></i>&nbsp;Markdown Edit</a>
-      <form class="navbar-form pull-left">
-        <button id="btnConv" class="btn  btn-small btn-inverse" rel="tooltip" title="convert &lt;br&gt;Mac : &#8984; + e&lt;br&gt;Win : ctrl + e"><i class="icon-caret-right"></i>&nbsp;convert</button>&nbsp;
-        <span id="menu1" class="input-append">
-          <input id="lefile" type="file" style="display:none">
-          <input id="fileinput" class="input-large" type="text" placeholder="set your local file">
-          <button id="btnBrowse" class="btn btn-small" rel="tooltip" title="browse file &lt;br&gt;Mac : &#8984; + o&lt;br&gt;Win : ctrl + o"><i class="icon-folder-open"></i></button>
-          <button id="btnRead" class="btn btn-small" rel="tooltip" title="read file &lt;br&gt;Mac : &#8984; + r&lt;br&gt;Win : ctrl + r"><i class="icon-refresh"></i></button>
-        </span>&nbsp;
-        <span id="menu2" class="btn-group">
-          <button id="btnRawMd" class="btn btn-small" rel="tooltip" title="view Raw .md &lt;br&gt;Mac : &#8984; + m&lt;br&gt;Win : ctrl + m">Raw .md</button>
-          <button id="btnRawHtml"   class="btn btn-small" rel="tooltip" title="view Raw .html &lt;br&gt;Mac : &#8984; + h&lt;br&gt;Win : ctrl + h">Raw .html</button>
-          <button id="btnHtml"   class="btn btn-small" rel="tooltip" title="view html on other window &lt;br&gt;Mac : &#8984; + alt + h&lt;br&gt;Win : ctrl + alt + h">&nbsp;.html&nbsp;</button>
-        </span>
-      </form>
-      <form id="menu3">
-        <label class="checkbox"><input type="checkbox" id="autoReload"> Auto Reload</label>
-        <label class="checkbox"><input type="checkbox" id="enableShortcut"> Enable Shortcut Key</label>
-      </form>
-      <form id="menu4">
-        <label class="radio"><input type="radio" name="optionsConverter" id="optionsConverter1" value="githubAPI">&nbsp;Use Github API for converter</label>
-        <label class="radio"><input type="radio" name="optionsConverter" id="optionsConverter2" value="marked" checked>&nbsp;Use <a href="https://github.com/chjj/marked">marked</a> for conveter</label>
-      </form>
-      <div class="clear"></div>
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#"><i class="fa fa-pencil-square-o"></i>&nbsp;Markdown Edit</a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <form class="navbar-form">
+          <div id="menu1" class="btn-group pull-left">
+            <button id="btnConv" class="btn btn-small btn-default" rel="tooltip" title="convert &lt;br&gt;Mac : &#8984; + e&lt;br&gt;Win : ctrl + e"><i class="fa fa-caret-right"></i>&nbsp;convert</button>
+            <button id="btnRawMd" class="btn btn-small btn-default" rel="tooltip" title="view Raw .md &lt;br&gt;Mac : &#8984; + m&lt;br&gt;Win : ctrl + m"><i class="fa fa-pencil-square-o"></i>Raw .md</button>
+            <button id="btnRawHtml" class="btn btn-small btn-default" rel="tooltip" title="view Raw .html &lt;br&gt;Mac : &#8984; + h&lt;br&gt;Win : ctrl + h"><i class="fa fa-file-code-o"></i>Raw .html</button>
+            <button id="btnHtml" class="btn btn-small btn-default" rel="tooltip" title="view html on other window &lt;br&gt;Mac : &#8984; + alt + h&lt;br&gt;Win : ctrl + alt + h"><i class="fa fa-html5"></i>.html</button>
+          </div>
+
+          <div id="menu5" class="input-group pull-left">
+            <div class="input-group">
+              <input id="externalCssUri" class="form-control col-xs-6" type="text" placeholder="external css uri">
+              <span id="applyCss" class="btn input-group-addon" type="button" rel="tooltip" title="apply">+</span>
+            </div>
+          </div>
+
+          <div id="menu2" class="input-group pull-left">
+            <input id="lefile" type="file" style="display:none">
+            <div class="input-group">
+              <input id="fileinput" class="form-control col-xs-6" type="text" placeholder="set your local file">
+              <span id="btnBrowse" class="input-group-addon" type="button" rel="tooltip" title="browse file &lt;br&gt;Mac : &#8984; + o&lt;br&gt;Win : ctrl + o"><i class="fa fa-folder-open-o"></i></span>
+              <span id="btnRead" class="input-group-addon" type="button" rel="tooltip" title="read file &lt;br&gt;Mac : &#8984; + r&lt;br&gt;Win : ctrl + r"><i class="fa fa-refresh"></i></span>
+            </div>
+          </div>
+
+          <div id="menu3" class="pull-left">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" id="autoReload"> Auto Reload
+              </label>
+              <br>
+              <label>
+                <input type="checkbox" id="enableShortcut"> Enable Shortcut Key
+              </label>
+            </div>
+          </div>
+
+          <div id="menu4" class="radio">
+            <label>
+              <input type="radio" name="optionsConverter" id="optionsConverter1" value="githubAPI">
+                Use Github API for converter
+            </label>
+            <br>
+            <label>
+              <input type="radio" name="optionsConverter" id="optionsConverter2" value="marked" checked>
+                Use <a href="https://github.com/chjj/marked" target="blank">marked</a> for conveter
+            </label>
+          </div>
+
+        </form>
+      </div>
     </div>
-  </div>
+  </nav>
   <a id="githubribbon" href="https://github.com/georgeosddev/markdown-edit" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;z-index: 1040" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
   </header><!-- /header -->
   <section id="main">
-    <div id="alertMessage" class="alert alert-block fade out display-none">
+    <div id="alertMessage" class="alert fade in display-none">
       <a class="close" data-dismiss="alert" href="#">&times;</a>
       <p></p>
     </div>
@@ -84,10 +114,10 @@ Part of Editor is depend on [CodeMirror](http://codemirror.net/).It enabeles
 * **Drag and Drop** file read.
 
 For more option, see [programming API](http://codemirror.net/doc/manual.html) of CodeMirror, and Hack [Markdown Edit](http://github.com/georgeosddev/markdown-edit)
-  
+
 ### Converter
 To Convert markdown to html, Markdown-Edit Use [Github's API](http://developer.github.com/v3/markdown/#render-a-markdown-document-in-raw-mode) as default.<br>
-For more infomation, See official Guide 
+For more infomation, See official Guide
 * [GitHub API v3](http://developer.github.com/v3/markdown/)
 * [github-flavored-markdown](http://github.github.com/github-flavored-markdown/)
 
@@ -108,7 +138,7 @@ To display converted HTML like Github, Markdown-Edit apply github.css from highl
 &lt;link rel="stylesheet" href="vendor/highlight.js/styles/github.css"&gt;
 ```
 
-If you want to see law html what [Github's API](http://developer.github.com/v3/markdown/#render-a-markdown-document-in-raw-mode) responsed, click `Raw .html` button on navbar.
+If you want to see raw html what [Github's API](http://developer.github.com/v3/markdown/#render-a-markdown-document-in-raw-mode) responsed, click `Raw .html` button on navbar.
 
 ## Getting Started
 
@@ -260,17 +290,17 @@ Developed by [Takeharu.Oshida](http://about.me/takeharu.oshida)
     <div id="out" class="markdown-body"></div><!-- /converted html will be here -->
     <div class="clear"></div>
   </section>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="vendor/jquery-1.8.2/jquery.min.js"><\/script>')</script>
-  <script src='vendor/bootstrap-2.1.1/js/bootstrap.min.js'></script>
+  <script src='bower_components/jquery/dist/jquery.min.js'></script>
+  <script src='bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
   <script src="vendor/codemirror-2.34/lib/codemirror.js"></script>
   <script src="vendor/codemirror-2.34/lib/util/overlay.js"></script>
   <script src="vendor/codemirror-2.34/mode/xml/xml.js"></script>
   <script src="vendor/codemirror-2.34/mode/markdown/markdown.js"></script>
   <script src="vendor/codemirror-2.34/mode/gfm/gfm.js"></script>
   <script src="vendor/codemirror-2.34/mode/javascript/javascript.js"></script>
-  <script src="vendor/marked/marked.js"></script>
-  <script src="vendor/highlight.js/highlight.pack.js"></script>
+  <script src="bower_components/marked/lib/marked.js"></script>
+  <script src="bower_components/highlightjs/highlight.pack.js"></script>
+
   <script src="javascript/scrollTop.js"></script>
   <script src="javascript/app.js"></script>
   <script type="text/javascript">

@@ -23,19 +23,19 @@ $(function(){
 
   // handle file
   $("#lefile").change(function() {
-     $('#fileinput').val($(this).val());
-  }); 
+    $('#fileinput').val($(this).val());
+  });
 
   // button binding
-  $(".btn").each(function(){
+  $(".btn, .input-group-addon").each(function(){
     var self = this;
-    $(self).bind("hover",function(){
+    $(self).on("hover",function(){
       $(self).tooltip({
-          placement:"bottom",
-          delay: { show: 100, hide: 100 }
+        placement:"bottom",
+        delay: { show: 100, hide: 100 }
       });
     })
-    .bind("click",function(event){
+    .on("click",function(event){
       event.preventDefault();
       handleOnClick($(self).attr("id"));
     });
@@ -43,29 +43,30 @@ $(function(){
 
   // checkbox binding
   $("#autoReload").change(function() {
-    application.enabeAutoReload = ($(this).attr("checked") === "checked");
+    application.enabeAutoReload = $(this).is(':checked');
     autoReload();
   });
 
   // checkbox binding
   $("#enableShortcut").change(function() {
-    application.enableShortcut = ($(this).attr("checked") === "checked");
-  }); 
+    application.enableShortcut = $(this).is(':checked');
+  });
 
 
   // checkbox binding
   $('[name="optionsConverter"]').change(function() {
     application.converter = $(this).val();
     convert();
-  }); 
+  });
 
   $("body").keydown( function(event) {
-    if (application.enableShortcut){ 
-      var code = (event.keyCode ? event.keyCode : event.which)
-      ,ctrl = event.ctrlKey
-      ,alt = event.altKey
-      ,shift = event.shiftKey
-      ,cmd = event.metaKey;
+    if (application.enableShortcut){
+      var code  = (event.keyCode ? event.keyCode : event.which),
+          ctrl  = event.ctrlKey,
+          alt   = event.altKey,
+          shift = event.shiftKey,
+          cmd   = event.metaKey
+          ;
       // browse file `ctrl + o`
       if ((ctrl || cmd) && code == 79) {
         event.preventDefault();
@@ -132,7 +133,7 @@ $(function(){
   }
   // Initialize html view
   convert();
-})
+});
 
 function handleOnClick(id){
   switch (id) {
@@ -141,11 +142,11 @@ function handleOnClick(id){
       $("#lefile").click();
     break;
     case "btnRead":
-      // read local file    
+      // read local file
       readFile();
-    break;    
+    break;
     case "btnRawMd":
-      // show Raw .md file    
+      // show Raw .md file
       viewRaw("md");
     break;
     case "btnRawHtml":
@@ -157,8 +158,12 @@ function handleOnClick(id){
       openViewer();
     break;
     case "btnConv":
-      // exec convert  
+      // exec convert
       convert();
+    break;
+    case "applyCss":
+      // apply css
+      applyCss();
     break;
     default:
       console.log("Error:invalid case");
@@ -181,12 +186,12 @@ function readFile(f){
   reader.onerror = function (evt) {
     showAlert("Cannot read file, some eroor occuerd.");
     return;
-  }
+  };
   reader.onload = function(evt){
     $("#in").val(evt.target.result);
     application.editor.setValue(evt.target.result);
     convert();
-  }
+  };
   reader.readAsText(fileData, "utf-8");
   // console.log("start read");
 }
@@ -206,7 +211,7 @@ function viewRaw(file){
       return;
   }
   blob = new Blob([text], {type: "text/plain",charset:"utf-8"});
-  window.open(window.URL.createObjectURL(blob),"_blank","width=800,height=800,titlebar=no,toolbar=yes,scrollbar=yes")
+  window.open(window.URL.createObjectURL(blob),"_blank","width=800,height=800,titlebar=no,toolbar=yes,scrollbar=yes");
 }
 
 // exec auto reload per 5(sec) if markdown was changed
@@ -221,7 +226,7 @@ function autoReload(){
 
 // convert markdown to html
 function convert(){
-  $("#alertMessage").alert("close");
+  //$("#alertMessage").alert("close");
   if (application.md == application.editor.getValue()) return showAlert("Nothing was changed","alert-info");
   if (application.isRendering) return showAlert("Now rendering","alert-info nowRendering");
 
@@ -241,9 +246,9 @@ function convert(){
     .fadeIn("fast");
     opttionCallback();
     application.isRendering = false;
-    $("#alertMessage .nowRendering").alert("close");
+    $("#alertMessage.nowRendering").alert("close");
     if(application.viewer) application.viewer.location.reload();
-  }
+  };
 
   switch (application.converter) {
     case "githubAPI":
@@ -282,7 +287,7 @@ function convert(){
       var data = marked(application.md);
       convertCallback(data,function(){
         // $("#out").removeClass("markdown-body");
-        $('#out pre code').each(function(i, e) {hljs.highlightBlock(e)});
+        $('#out pre code').each(function(i, e) {hljs.highlightBlock(e);});
       });
     break;
     default:
@@ -293,7 +298,7 @@ function convert(){
 
 // showAlert
 function showAlert(msg,option){
-  $("#alertMessage").alert("close");
+  //$("#alertMessage").alert("close");
   if(!option) option = "alert-error";
   $("#alertMessage>p").text(msg);
   $("#alertMessage")
@@ -301,14 +306,14 @@ function showAlert(msg,option){
   .removeClass("out")
   .addClass(option)
   .addClass("in")
-  .bind("close", function (evt) {
+  .bind("close.bs.alert", function (evt) {
     evt.preventDefault();
     $(this)
     .removeClass("in")
     .addClass("out")
     .trigger("closed");
   })
-  .bind("closed", function () {
+  .bind("closed.bs.alert", function () {
     var self = this;
     $(self)
     .addClass("display-none")
@@ -322,3 +327,17 @@ function openViewer(){
   application.viewer = open('view.html','_blank','width=800,height=800,titlebar=no,toolbar=no,scrollbar=yes');
 }
 
+function applyCss(){
+  var button =  $("#applyCss");
+  var applying = button.text() !== "+";
+  if (applying){
+    $("#externalCssUri").val("");
+    $("#htmlStyle").attr("href", "css/empty.css");
+    button.text("+");
+  } else {
+    var resource = $("#externalCssUri").val();
+    if (!resource) return false;
+    $("#htmlStyle").attr("href", resource);
+    button.text("-");
+  }
+}

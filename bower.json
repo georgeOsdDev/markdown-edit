@@ -1,0 +1,30 @@
+{
+  "name": "markdown-edit",
+  "version": "0.0.1",
+  "homepage": "https://github.com/georgeOsdDev/markdown-edit",
+  "authors": [
+    "Takeharu.Oshida <georgeosddev@gmail.com>"
+  ],
+  "description": "online markdown editor/viewer",
+  "keywords": [
+    "markdown",
+    "gfm"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.1.1",
+    "marked": "~0.3.2",
+    "font-awesome": "~4.1.0",
+    "codemirror": "~4.2.0",
+    "normalize-css": "~3.0.1",
+    "modernizr": "~2.8.2",
+    "highlightjs": "~8.0.0"
+  }
+}
