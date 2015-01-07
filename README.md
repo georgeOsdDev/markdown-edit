@@ -19,13 +19,14 @@ Part of Editor is depend on [CodeMirror](http://codemirror.net/).It enabeles
 * Visible `Tab` key
 * **Highlight syntax** of markdown.
 * **Drag and Drop** file read.
+* Switchable theme.
 
 For more option, see [programming API](http://codemirror.net/doc/manual.html) of CodeMirror, and Hack [Markdown Edit](http://github.com/georgeosddev/markdown-edit)
 
 ### Converter
 To Convert markdown to html, Markdown-Edit Use [Github's API](http://developer.github.com/v3/markdown/#render-a-markdown-document-in-raw-mode) as default.
 
-> The raw API is not JSON-based. It takes a Markdown document as plaintext `text/plain` or `text/x-markdown` and renders it as plain Markdown without a repository context (just like a README.md file is rendered – this is the simplest way to preview a readme online).
+The raw API is not JSON-based. It takes a Markdown document as plaintext `text/plain` or `text/x-markdown` and renders it as plain Markdown without a repository context (just like a README.md file is rendered – this is the simplest way to preview a readme online).
 
 For more infomation, See official Guide
 * [GitHub API v3](http://developer.github.com/v3/markdown/)
@@ -35,19 +36,18 @@ For more infomation, See official Guide
 *NOTICE* : [GitHub API v3](http://developer.github.com/v3/#rate-limiting) is limited 5000requests per hour.
 
 #### Option: Use [marked](https://github.com/chjj/marked) as conveter.
-If you checked radio `Use marked for conveter` **markdown-edit** use [marked](https://github.com/chjj/marked) and [highlight.js](http://softwaremaniacs.org/soft/highlight/en/) instad of Github's API.<br>
-It is faster than API call and make you enable to use this app at offline.<br>
-*NOTICE* : [marked](https://github.com/chjj/marked) does not support GFM Tables and Anchor.
+If you checked radio `Use marked for conveter` **markdown-edit** use [marked](https://github.com/chjj/marked)
+and [highlight.js](http://softwaremaniacs.org/soft/highlight/en/) instad of Github's API.
+It is faster than API call and make you enable to use this app at offline.
+*NOTICE* : [marked](https://github.com/chjj/marked) does not support anchor.
 
 
 ### Viewer
-To display converted HTML like Github, Markdown-Edit apply github-style.css.(This css is based on [github/gollum](https://raw.github.com/github/gollum/master/lib/gollum/frontend/public/gollum/css/template.css)) and [Font Awesome](http://fortawesome.github.com/Font-Awesome/).
-And [github.css from highlight.js](http://softwaremaniacs.org/media/soft/highlight/test.html) will apply when it was converted by *marked*.
+To display converted HTML like Github, Markdown-Edit apply github.css from highlight.js and github-style.css inspired by [gollum](https://github.com/gollum/gollum/blob/master/lib/gollum/public/gollum/css/template.css).
 
 ```html
-<link rel="stylesheet" href="vendor/font-awesome-2.0/css/font-awesome.css">
+<link rel="stylesheet" href="bower_components/highlightjs/styles/github.css">
 <link rel="stylesheet" href="css/github-style.css">
-<link rel="stylesheet" href="vendor/highlight.js/styles/github.css">
 ```
 
 If you want to see raw html what [Github's API](http://developer.github.com/v3/markdown/#render-a-markdown-document-in-raw-mode) responsed, click `Raw .html` button on navbar.
@@ -62,12 +62,18 @@ use git
 
 ```bash
 git clone http://github.com/georegeosddev/markdown-edit.git
-cd markdown-edit
-npm install -g bower
-bower install
 ```
 
 Or download from [Here](https://github.com/georgeOsdDev/markdown-edit/zipball/master)
+
+#### Download dependencies
+
+use [bower](http://bower.io/)
+
+```bash
+bower install
+```
+
 
 #### Deploy to some web server
 To avoid ajax error yous should deploy whole files to some web server.
@@ -118,12 +124,12 @@ Win : ```ctrl + m```
 Mac : ```⌘ + h```
 Win : ```ctrl + h```
 * View html in other window<br>
-Mac : ```⌘ + ⌥ + h```
+Mac : ```⌘ + alt + h```
 Win : ```ctrl + alt + h```
 
 If your are using chrome,
 * Enter Full Screen Mode<br>
-Mac : ```⌘ + ⇧ + f```
+Mac : ```⌘ + shift + f```
 Win : ```F11```
 
 
@@ -151,49 +157,47 @@ ID  |Name|Rank
 1   |Tom Preston-Werner |Awesome
 2   |Albert Einstein |Nearly as awesome
 
-*NOTICE* [marked](https://github.com/chjj/marked) does not support GFM Tables.
-
 and
 
 ```html
 <table>
-  <tr>
-    <th>ID</th><th>Name</th><th>Rank</th>
-  </tr>
-  <tr>
-    <td>1</td><td>Tom Preston-Werner</td><td>Awesome</td>
-  </tr>
-  <tr>
-    <td>2</td><td>Albert Einstein</td><td>Nearly as awesome</td>
-  </tr>
+<tr>
+<th>ID</th><th>Name</th><th>Rank</th>
+</tr>
+<tr>
+<td>1</td><td>Tom Preston-Werner</td><td>Awesome</td>
+</tr>
+<tr>
+<td>2</td><td>Albert Einstein</td><td>Nearly as awesome</td>
+</tr>
 </table>
 ```
 
 also become
 
 <table>
-  <tr>
-    <th>ID</th><th>Name</th><th>Rank</th>
-  </tr>
-  <tr>
-    <td>1</td><td>Tom Preston-Werner</td><td>Awesome</td>
-  </tr>
-  <tr>
-    <td>2</td><td>Albert Einstein</td><td>Nearly as awesome</td>
-  </tr>
+<tr>
+<th>ID</th><th>Name</th><th>Rank</th>
+</tr>
+<tr>
+<td>1</td><td>Tom Preston-Werner</td><td>Awesome</td>
+</tr>
+<tr>
+<td>2</td><td>Albert Einstein</td><td>Nearly as awesome</td>
+</tr>
 </table>
 
 
 ## Special Thanks
- * [CodeMirror](http://codemirror.net/).
- * [Github](http://developer.github.com/) for API and style.
- * [marked](https://github.com/chjj/marked).
- * [highlight.js](http://softwaremaniacs.org/soft/highlight/en/).
- * [Twitter Bootstrap](http://twitter.github.com/bootstrap/) with [Font Awesome](http://fortawesome.github.com/Font-Awesome/).
- * [HTML5 ★ BOILERPLATE](http://html5boilerplate.com/).
- * [jQuery](http://jquery.com/).
- * [HTML5 ROCKS](http://www.html5rocks.com/en/tutorials/file/xhr2/) for usage of BLOB.
- * [balupton](https://github.com/balupton).
+* [CodeMirror](http://codemirror.net/).
+* [Github](http://developer.github.com/) for API and style.
+* [marked](https://github.com/chjj/marked).
+* [highlight.js](http://softwaremaniacs.org/soft/highlight/en/).
+* [Twitter Bootstrap](http://twitter.github.com/bootstrap/) with [Font Awesome](http://fortawesome.github.com/Font-Awesome/).
+* [HTML5 ★ BOILERPLATE](http://html5boilerplate.com/).
+* [jQuery](http://jquery.com/).
+* [HTML5 ROCKS](http://www.html5rocks.com/en/tutorials/file/xhr2/) for usage of BLOB.
+* [balupton](https://github.com/balupton).
 
 ## Licence
 

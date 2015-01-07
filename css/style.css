@@ -6,6 +6,10 @@ body {
   margin-top:50px;
 }
 
+section#main {
+  padding-top: 15px;
+}
+
 .navbar .brand {
   margin-left: 5px;
   margin-top: 2px;
@@ -86,4 +90,22 @@ body {
   #out {
     width:50%;
   }
+}
+
+div.CodeMirror {
+  width: 45%;
+  float: left;
+  background-color:#e7e7e7;
+  min-height:800px;
+  height:100%;
+}
+
+.scrollable-drop {
+  height: auto;
+  max-height: 200px;
+  overflow-x: hidden;
+}
+
+.select-theme.active {
+  color: #4183C4;
 }
