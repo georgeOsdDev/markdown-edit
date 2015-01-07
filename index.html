@@ -16,8 +16,9 @@
   <link rel="stylesheet" href="bower_components/normalize-css/normalize.css">
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/codemirror-custom.css">
+  <link rel="stylesheet" href="bower_components/codemirror/lib/codemirror.css">
   <link rel="stylesheet" href="bower_components/highlightjs/styles/github.css">
+  <link rel="stylesheet" href="css/github-style.css">
   <link rel="stylesheet" href="css/style.css">
   <link id = "htmlStyle" rel="stylesheet" href="css/empty.css">
   <script src="bower_components/modernizr/modernizr.js"></script>
@@ -33,16 +34,55 @@
       <div class="collapse navbar-collapse">
         <form class="navbar-form">
           <div id="menu1" class="btn-group pull-left">
-            <button id="btnConv" class="btn btn-small btn-default" rel="tooltip" title="convert &lt;br&gt;Mac : &#8984; + e&lt;br&gt;Win : ctrl + e"><i class="fa fa-caret-right"></i>&nbsp;convert</button>
-            <button id="btnRawMd" class="btn btn-small btn-default" rel="tooltip" title="view Raw .md &lt;br&gt;Mac : &#8984; + m&lt;br&gt;Win : ctrl + m"><i class="fa fa-pencil-square-o"></i>Raw .md</button>
-            <button id="btnRawHtml" class="btn btn-small btn-default" rel="tooltip" title="view Raw .html &lt;br&gt;Mac : &#8984; + h&lt;br&gt;Win : ctrl + h"><i class="fa fa-file-code-o"></i>Raw .html</button>
-            <button id="btnHtml" class="btn btn-small btn-default" rel="tooltip" title="view html on other window &lt;br&gt;Mac : &#8984; + alt + h&lt;br&gt;Win : ctrl + alt + h"><i class="fa fa-html5"></i>.html</button>
+            <button id="btnConv" class="btn btn-small btn-default" data-toggle="tooltip" title="convert <br>Mac : &#8984; + e<br>Win : ctrl + e"><i class="fa fa-caret-right"></i>&nbsp;convert</button>
+            <button id="btnRawMd" class="btn btn-small btn-default" data-toggle="tooltip" title="view Raw .md <br>Mac : &#8984; + m<br>Win : ctrl + m"><i class="fa fa-pencil-square-o"></i>Raw .md</button>
+            <button id="btnRawHtml" class="btn btn-small btn-default" data-toggle="tooltip" title="view Raw .html <br>Mac : &#8984; + h<br>Win : ctrl + h"><i class="fa fa-file-code-o"></i>Raw .html</button>
+            <button id="btnHtml" class="btn btn-small btn-default" data-toggle="tooltip" title="view html on other window <br>Mac : &#8984; + alt + h<br>Win : ctrl + alt + h"><i class="fa fa-html5"></i>.html</button>
           </div>
 
           <div id="menu5" class="input-group pull-left">
-            <div class="input-group">
+            <!-- <div class="input-group">
               <input id="externalCssUri" class="form-control col-xs-6" type="text" placeholder="external css uri">
-              <span id="applyCss" class="btn input-group-addon" type="button" rel="tooltip" title="apply">+</span>
+              <span id="applyCss" class="btn input-group-addon" type="button" data-toggle="tooltip" title="toggle css">+</span>
+            </div> -->
+            <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                Theme
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu scrollable-drop" role="menu" aria-labelledby="dropdownMenu1">
+                <li><a class="select-theme active" href="#" data-theme="default">default</a></li>
+                <li><a class="select-theme" href="#" data-theme="3024-day">3024-day</a></li>
+                <li><a class="select-theme" href="#" data-theme="3024-night">3024-night</a></li>
+                <li><a class="select-theme" href="#" data-theme="ambiance-mobile">ambiance-mobile</a></li>
+                <li><a class="select-theme" href="#" data-theme="ambiance">ambiance</a></li>
+                <li><a class="select-theme" href="#" data-theme="base16-dark">base16-dark</a></li>
+                <li><a class="select-theme" href="#" data-theme="base16-light">base16-light</a></li>
+                <li><a class="select-theme" href="#" data-theme="blackboard">blackboard</a></li>
+                <li><a class="select-theme" href="#" data-theme="cobalt">cobalt</a></li>
+                <li><a class="select-theme" href="#" data-theme="eclipse">eclipse</a></li>
+                <li><a class="select-theme" href="#" data-theme="elegant">elegant</a></li>
+                <li><a class="select-theme" href="#" data-theme="erlang-dark">erlang-dark</a></li>
+                <li><a class="select-theme" href="#" data-theme="lesser-dark">lesser-dark</a></li>
+                <li><a class="select-theme" href="#" data-theme="mbo">mbo</a></li>
+                <li><a class="select-theme" href="#" data-theme="mdn-like">mdn-like</a></li>
+                <li><a class="select-theme" href="#" data-theme="midnight">midnight</a></li>
+                <li><a class="select-theme" href="#" data-theme="monokai">monokai</a></li>
+                <li><a class="select-theme" href="#" data-theme="neat">neat</a></li>
+                <li><a class="select-theme" href="#" data-theme="neo">neo</a></li>
+                <li><a class="select-theme" href="#" data-theme="nightnight">night</a></li>
+                <li><a class="select-theme" href="#" data-theme="paraiso-dark">paraiso-dark</a></li>
+                <li><a class="select-theme" href="#" data-theme="paraiso-light">paraiso-light</a></li>
+                <li><a class="select-theme" href="#" data-theme="pastel-on-dark">pastel-on-dark</a></li>
+                <li><a class="select-theme" href="#" data-theme="rubyblue">rubyblue</a></li>
+                <li><a class="select-theme" href="#" data-theme="solarized">solarized</a></li>
+                <li><a class="select-theme" href="#" data-theme="the-matrix">the-matrix</a></li>
+                <li><a class="select-theme" href="#" data-theme="tomorrow-night-eighties">tomorrow-night-eighties</a></li>
+                <li><a class="select-theme" href="#" data-theme="twilight">twilight</a></li>
+                <li><a class="select-theme" href="#" data-theme="vibrant-ink">vibrant-ink</a></li>
+                <li><a class="select-theme" href="#" data-theme="xq-dark">xq-dark</a></li>
+                <li><a class="select-theme" href="#" data-theme="xq-light">xq-light</a></li>
+              </ul>
             </div>
           </div>
 
@@ -50,8 +90,8 @@
             <input id="lefile" type="file" style="display:none">
             <div class="input-group">
               <input id="fileinput" class="form-control col-xs-6" type="text" placeholder="set your local file">
-              <span id="btnBrowse" class="input-group-addon" type="button" rel="tooltip" title="browse file &lt;br&gt;Mac : &#8984; + o&lt;br&gt;Win : ctrl + o"><i class="fa fa-folder-open-o"></i></span>
-              <span id="btnRead" class="input-group-addon" type="button" rel="tooltip" title="read file &lt;br&gt;Mac : &#8984; + r&lt;br&gt;Win : ctrl + r"><i class="fa fa-refresh"></i></span>
+              <span id="btnBrowse" class="input-group-addon" type="button" data-toggle="tooltip" title="browse file <br>Mac : &#8984; + o<br>Win : ctrl + o"><i class="fa fa-folder-open-o"></i></span>
+              <span id="btnRead" class="input-group-addon" type="button" data-toggle="tooltip" title="read file <br>Mac : &#8984; + r<br>Win : ctrl + r"><i class="fa fa-refresh"></i></span>
             </div>
           </div>
 
@@ -127,14 +167,15 @@ For more infomation, See official Guide
 If you checked radio `Use marked for conveter` **markdown-edit** use [marked](https://github.com/chjj/marked)
 and [highlight.js](http://softwaremaniacs.org/soft/highlight/en/) instad of Github's API.
 It is faster than API call and make you enable to use this app at offline.
-*NOTICE* : [marked](https://github.com/chjj/marked) does not support GFM Tables and Anchor.
 
+*NOTICE* : [marked](https://github.com/chjj/marked) does not support Anchor.
 
 ### Viewer
-To display converted HTML like Github, Markdown-Edit apply github.css from highlight.js.
+To display converted HTML like Github, Markdown-Edit apply github.css from highlight.js and github-style.css inspired by [gollum](https://github.com/gollum/gollum/blob/master/lib/gollum/public/gollum/css/template.css).
 
 ```html
-&lt;rel="stylesheet" href="vendor/highlight.js/styles/github.css"&gt;
+&lt;link rel="stylesheet" href="bower_components/highlightjs/styles/github.css"&gt;
+&lt;link rel="stylesheet" href="css/github-style.css"&gt;
 ```
 
 If you want to see raw html what [Github's API](http://developer.github.com/v3/markdown/#render-a-markdown-document-in-raw-mode) responsed, click `Raw .html` button on navbar.
@@ -152,6 +193,15 @@ git clone http://github.com/georegeosddev/markdown-edit.git
 ```
 
 Or download from [Here](https://github.com/georgeOsdDev/markdown-edit/zipball/master)
+
+#### Download dependencies
+
+use [bower](http://bower.io/)
+
+```bash
+bower install
+```
+
 
 #### Deploy to some web server
 To avoid ajax error yous should deploy whole files to some web server.
@@ -235,8 +285,6 @@ ID  |Name|Rank
 1   |Tom Preston-Werner |Awesome
 2   |Albert Einstein |Nearly as awesome
 
-*NOTICE* [marked](https://github.com/chjj/marked) does not support GFM Tables.
-
 and
 
 ```html
@@ -290,14 +338,17 @@ Developed by [Takeharu.Oshida](http://about.me/takeharu.oshida)
     <div id="out" class="markdown-body"></div><!-- /converted html will be here -->
     <div class="clear"></div>
   </section>
-  <script src='bower_components/jquery/dist/jquery.min.js'></script>
-  <script src='bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
-  <script src="vendor/codemirror-2.34/lib/codemirror.js"></script>
-  <script src="vendor/codemirror-2.34/lib/util/overlay.js"></script>
-  <script src="vendor/codemirror-2.34/mode/xml/xml.js"></script>
-  <script src="vendor/codemirror-2.34/mode/markdown/markdown.js"></script>
-  <script src="vendor/codemirror-2.34/mode/gfm/gfm.js"></script>
-  <script src="vendor/codemirror-2.34/mode/javascript/javascript.js"></script>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="bower_components/codemirror/lib/codemirror.js"></script>
+  <script src="bower_components/codemirror/addon/edit/closebrackets.js"></script>
+  <script src="bower_components/codemirror/addon/edit/matchbrackets.js"></script>
+  <script src="bower_components/codemirror/addon/selection/active-line.js"></script>
+  <script src="bower_components/codemirror/addon/mode/overlay.js"></script>
+  <script src="bower_components/codemirror/mode/xml/xml.js"></script>
+  <script src="bower_components/codemirror/mode/markdown/markdown.js"></script>
+  <script src="bower_components/codemirror/mode/gfm/gfm.js"></script>
+  <script src="bower_components/codemirror/mode/javascript/javascript.js"></script>
   <script src="bower_components/marked/lib/marked.js"></script>
   <script src="bower_components/highlightjs/highlight.pack.js"></script>
 
