@@ -1,0 +1,73 @@
+{
+  "name": "markdown-edit",
+  "version": "0.4.0",
+  "description": "Online markdown editor/viewer",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/karma start --browsers Firefox --single-run",
+    "browser": "browser-sync start --files ./* --server .",
+    "watch": "watchify lib/index.js -dv -o bundle.js",
+    "start": "npm run watch & npm run browser",
+    "test:local": "karma start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/georgeOsdDev/markdown-edit.git"
+  },
+  "keywords": [
+    "markdown",
+    "react",
+    "marked",
+    "GFM"
+  ],
+  "author": "Takeharu.Oshida",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/georgeOsdDev/markdown-edit/issues"
+  },
+  "homepage": "https://github.com/georgeOsdDev/markdown-edit",
+  "devDependencies": {
+    "babel-eslint": "^3.1.9",
+    "babelify": "^6.1.2",
+    "browser-sync": "^2.7.6",
+    "browserify": "^10.2.1",
+    "chai": "^2.3.0",
+    "eslint": "^0.21.2",
+    "eslint-plugin-react": "^2.3.0",
+    "karma": "^0.12.35",
+    "karma-browserify": "^4.2.1",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^0.1.12",
+    "karma-cli": "0.0.4",
+    "karma-firefox-launcher": "^0.1.6",
+    "karma-mocha": "^0.1.10",
+    "karma-safari-launcher": "^0.1.1",
+    "karma-spec-reporter": "0.0.19",
+    "watchify": "^3.2.1",
+    "mocha": "^2.2.5"
+  },
+  "dependencies": {
+    "classnames": "^2.1.2",
+    "codemirror": "^5.3.0",
+    "flux": "^2.0.3",
+    "highlight.js": "^8.6.0",
+    "immutable": "^3.7.3",
+    "lodash": "^3.9.3",
+    "marked": "^0.3.3",
+    "object-assign": "^3.0.0",
+    "react": "^0.13.3",
+    "react-draggable": "^0.8.0",
+    "react-style": "^0.5.5",
+    "superagent": "^1.2.0"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "compact": false
+        }
+      ]
+    ]
+  }
+}
