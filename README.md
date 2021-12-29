@@ -1,13 +1,13 @@
-# [Markdown Edit](http://georgeosddev.github.com/markdown-edit)
+# [Markdown Edit](https://georgeosddev.github.io/markdown-edit)
 
 This is a online markdown editor/viewer.<br>
 This help you to edit markdown document with the power of web technology.
 
-[![Screen Shot](https://raw.github.com/georgeOsdDev/markdown-edit/master/images/ScreenShot.png)](http://georgeosddev.github.com/markdown-edit)
+[![Screen Shot](https://raw.github.com/georgeOsdDev/markdown-edit/master/images/ScreenShot.png)](https://georgeosddev.github.io/markdown-edit)
 
 ## Quick Start
 
-Try on [Demo](http://georgeosddev.github.com/markdown-edit) page.<br>
+Try on [Demo](https://georgeosddev.github.io/markdown-edit) page.<br>
 Or Install on your local PC. Check [Guide](#on-your-local-pc) to how to install.
 
 ## Feature
@@ -21,7 +21,7 @@ Part of Editor is depend on [CodeMirror](http://codemirror.net/).It enabeles
 * **Drag and Drop** file read.
 * Switchable theme.
 
-For more option, see [programming API](http://codemirror.net/doc/manual.html) of CodeMirror, and Hack [Markdown Edit](http://github.com/georgeosddev/markdown-edit)
+For more option, see [programming API](http://codemirror.net/doc/manual.html) of CodeMirror, and Hack [Markdown Edit](https://github.com/georgeOsdDev/markdown-edit)
 
 ### Converter
 To Convert markdown to html, Markdown-Edit Use [Github's API](http://developer.github.com/v3/markdown/#render-a-markdown-document-in-raw-mode) as default.
